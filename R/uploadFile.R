@@ -3,11 +3,11 @@
 #' @param uri The base uri of a Canvas installation
 #' @param ID Course id to create upload the file to
 #' @param name The name of the file upon upload.
-#' @param localpath The path to the file.
+#' @param filelocal The path to the file.
 #' @param path Path of the folder in course files.
 #' @param ... Optional page options to pass to processRequest
 #' @export
-uploadFile <- function(uri, ID, name = "", localpath = "", path = "") {
+uploadFile <- function(uri, ID, name = "", filelocal = "", path = "") {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
@@ -30,20 +30,23 @@ uploadFile <- function(uri, ID, name = "", localpath = "", path = "") {
         ##Pass the url to the request processor
         results <- processRequest(urlbase, JSONbody, method = "CREATE")
         
+        
         ##Get the upload token
+        ##fpath <- normalizePath(dirname(filelocal))
+        ##fname <- z <- gsub("\\/.*\\/", "", filelocal)
+        ##ffull = paste0(fpath, "/", fname)
+        ##JSONbody <- ffull
         ##params <- mapply(paste0, "&", names(results$upload_params), "=", results$upload_params)
-        ##params <- paste0(x, collapse = "")
+        ##params <- paste0(params, collapse = "")
+        ##params <- paste0(params, "&file=@", filelocal)
+        ##urlbase <- URLencode(params, reserved = TRUE)
         ##urlbase <- paste0(results$upload_url, "?", params, collapse = "")
+        ##JSONbody <- filelocal
+        ##print(JSONbody)
         
-        urlbase <- jsonlite::fromJSON(results, flatten = TRUE)
-        urlbase <- urlbase$upload_url
-        urlbase <- URLencode(urlbase)
-        print(urlbase)
-        
-        file <- upload_file(localpath)
-        
-        JSONbody <- list(x = results, y = file)
-        
+        results$filename <- filelocal 
+        JSONbody <- results
+        ##print(urlbase)        
         ##Pass the url to the request processor
         results <- processRequest(urlbase, JSONbody, method = "UPLOAD")
         

@@ -102,19 +102,21 @@ processRequest <- function(urlbase, method = "GET", JSONbody,
                 }    
                 
                 results <- content(request, as = "text")
-                ##results <- jsonlite::fromJSON(results, flatten = TRUE)
+                results <- jsonlite::fromJSON(results, flatten = TRUE)
 
                 return(results)
         }
         
         if (method == "UPLOAD") {
-                results <- NULL
-                url <- urlbase
+                results <- JSONbody
+                url <- results$upload_url
+                params <- results$upload_params
+                params <- c(params, upload_file(results$filename))
                 request <- POST(url, 
-                                add_headers(Authorization = header),
-                                ##content_type("multipart/form-data"),
+                                content_type("multipart/form-data"),
                                 encode = "multipart",
-                                body = JSONbody, verbose(data_out = TRUE))
+                                body = params,
+                                verbose())
                 
                 status <- http_status(request)   
                 
