@@ -111,15 +111,20 @@ processRequest <- function(urlbase, method = "GET", JSONbody,
                 results <- JSONbody
                 url <- results$upload_url
                 params <- results$upload_params
-                params <- c(params, upload_file(results$filename))
+                params$file <- upload_file(results$filename)##This right here is the magic
                 request <- POST(url, 
                                 content_type("multipart/form-data"),
                                 encode = "multipart",
-                                body = params,
-                                verbose())
+                                body = params)
+                                ##verbose(), progress())##For testing
+                
+                if (response$all_headers[[2]]$status == 303) {
+                        request <- GET(request$url, 
+                                        add_headers(Authorization = header))
+                }
                 
                 status <- http_status(request)   
-                
+
                 ###DEAL WITH SOME ERROR MESSAGES
                 if (status[["category"]] == "server error") {
                         stop(status[["message"]])

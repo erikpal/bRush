@@ -30,23 +30,9 @@ uploadFile <- function(uri, ID, name = "", filelocal = "", path = "") {
         ##Pass the url to the request processor
         results <- processRequest(urlbase, JSONbody, method = "CREATE")
         
-        
-        ##Get the upload token
-        ##fpath <- normalizePath(dirname(filelocal))
-        ##fname <- z <- gsub("\\/.*\\/", "", filelocal)
-        ##ffull = paste0(fpath, "/", fname)
-        ##JSONbody <- ffull
-        ##params <- mapply(paste0, "&", names(results$upload_params), "=", results$upload_params)
-        ##params <- paste0(params, collapse = "")
-        ##params <- paste0(params, "&file=@", filelocal)
-        ##urlbase <- URLencode(params, reserved = TRUE)
-        ##urlbase <- paste0(results$upload_url, "?", params, collapse = "")
-        ##JSONbody <- filelocal
-        ##print(JSONbody)
-        
         results$filename <- filelocal 
         JSONbody <- results
-        ##print(urlbase)        
+
         ##Pass the url to the request processor
         results <- processRequest(urlbase, JSONbody, method = "UPLOAD")
         
