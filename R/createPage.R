@@ -3,7 +3,7 @@
 #' Get course details for the account requesting. All include parameters (see API
 #' documentation) for this request have all been enabled and can be subsetted out 
 #' if not needed.
-#' @param uri The base uri of a Canvas installation
+#' @param url The base url of a Canvas installation
 #' @param ID Course or group id to create the page in
 #' @param title String of page title.
 #' @param body String of body content.
@@ -13,19 +13,21 @@
 #' @param front Boolean to set page as the front page
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createPage <- function(uri, ID, title = NULL, body = NULL, 
-                         edit = "teachers", notify = FALSE, publish = TRUE,
-                         front = FALSE) {
+createPage <- function(url, ID, title = NULL, body = NULL, 
+                        edit = "teachers", notify = FALSE,
+                        publish = TRUE,
+                        front = FALSE) {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
-        require(utils)
-        urlbase <- sub("uri", uri, "uri/api/v1/courses/ID/pages?")
-        urlbase <- sub("ID", ID, urlbase)
+        require(httr)
+        url <- parse_url(url)
+        url$path <- "api/v1/courses/ID/pages"
+        url$path <- sub("ID", ID, url$path)
 
         ##Build the JSON for the body of the 
         require(jsonlite)
-        JSONbody <- list(
+        body <- list(
                 wiki_page = list(
                         title = title,
                         body = body,
@@ -35,14 +37,12 @@ createPage <- function(uri, ID, title = NULL, body = NULL,
                         front_page = front
                 )
         )
-        JSONbody <- toJSON(JSONbody, auto_unbox = TRUE)
+        body <- toJSON(body, auto_unbox = TRUE)
 
-        urlbase <- URLencode(urlbase)
-        
-        print(urlbase)
+        print(build_url(url))
 
         ##Pass the url to the request processor
-        results <- processRequest(urlbase, JSONbody, method = "CREATE")
+        results <- processRequest(url, body, method = "CREATE")
         
         return(results)
 }

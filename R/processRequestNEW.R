@@ -1,4 +1,4 @@
-#' Get Multipage Results - FORMER VERSION
+#' Get Multipage Results - NEW VERSION
 #' 
 #' Takes a url constructed for API request, including url parameters to produce one 
 #' result from multiple requests across multiple pages.  The parameters of this 
@@ -10,7 +10,7 @@
 #' @export
 
 ##TODO: per_page set to 1 causes problems
-processRequest2 <- function(urlbase, method = "GET", JSONbody,
+processRequest <- function(url, body, method = "GET",
                            per_page = 100, page = 1, end_page = NULL) {
         require(httr)
         require(jsonlite)
@@ -22,7 +22,8 @@ processRequest2 <- function(urlbase, method = "GET", JSONbody,
         if (method == "GET") {
                 results <- data.frame()
                 while (page > 0) {
-                        url <- paste0(urlbase, "&page=", page, "&per_page=", per_page)
+                        url$query <- c(url$query, page = page, per_page = per_page)
+
                         request <- GET(url, add_headers(Authorization = header))
                         status <- http_status(request)
                         
@@ -39,13 +40,13 @@ processRequest2 <- function(urlbase, method = "GET", JSONbody,
                                 if (length(x) == 0) {
                                         stop("No Results")
                                 } else {
-                                results <- x
-                                break
+                                        results <- x
+                                        break
                                 }
                         }
                         
                         results <- bind_rows(results, x)##Build the data through loops
-        
+                        
                         ##Check to make sure end page is after start page
                         if (!is.null(end_page)) {
                                 if (end_page < page) {stop("Requested end_page is less than the start page.")}
@@ -79,11 +80,11 @@ processRequest2 <- function(urlbase, method = "GET", JSONbody,
         
         if (method == "CREATE") {
                 results <- NULL
-                url <- urlbase
+
                 request <- POST(url, 
                                 add_headers(Authorization = header),
                                 content_type_json(),
-                                body = JSONbody)
+                                body = body)
                 status <- http_status(request)   
                 
                 ##Deal with errors
@@ -91,28 +92,26 @@ processRequest2 <- function(urlbase, method = "GET", JSONbody,
                 
                 results <- content(request, as = "text")
                 results <- jsonlite::fromJSON(results, flatten = TRUE)
-
+                
                 return(results)
         }
         
         if (method == "UPLOAD") {
-                results <- JSONbody
-                url <- results$upload_url
+                results <- body##rename after pass
                 params <- results$upload_params
-                params$file <- upload_file(results$filename)##This right here is the magic
+                params$file <- upload_file(results$filename)##Add the file name to the needed params
                 request <- POST(url, 
                                 content_type("multipart/form-data"),
                                 encode = "multipart",
                                 body = params)
-                                ##verbose(), progress())##For testing
-                
-                if (response$all_headers[[2]]$status == 303) {
+
+                if (request$all_headers[[2]]$status == 303) {
                         request <- GET(request$url, 
-                                        add_headers(Authorization = header))
+                                       add_headers(Authorization = header))
                 }
                 
                 status <- http_status(request)   
-
+                
                 ##Deal with errors
                 checkErrors(status) 
                 
