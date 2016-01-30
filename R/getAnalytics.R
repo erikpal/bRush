@@ -1,35 +1,31 @@
 #' Get account or course analytics
 #' 
-#' Get a list of available reports
-#' @param uri The base uri of a Canvas installation
-#' @param ID The account ID to retrieve reports from
+#' @param url The base url of a Canvas installation
+#' @param ID The account or course ID to retrieve analytics for
 #' @param type The analytics type (e.g., activity, grades, statistics, assignments, communication, student_summaries)
 #' @param term The term ID, "complete", or "current"(for account analytics only)
 #' @param course Boolean to specify it the request is for a course.
 #' @param studentID ID of a student for student specific requests (activity, assignment, communication)
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getAnalytics <- function(uri, ID, type = "activity", term = "current", course = FALSE, 
-                         studentID = NULL, ...) {
+getAnalytics <- function(url, ID, type = "activity", term = "current", 
+                         course = FALSE, studentID = NULL, ...) {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
-        require(utils)
 
         term <- paste0("terms/", term)
+        url <- parse_url(url)
         
         if (course == TRUE) {
                 if (!is.null(studentID)) {
                         if (!type %in% c("activity", "assignments", "communication")) {
                                 stop("Student analytics available for 'activity', 'assignments', or 'commuication'")
                         } else {
-                                urlbase <- sub("uri", uri, "uri/api/v1/courses/courseID/analytics/users/studentID/typeNM?")
-                                urlbase <- sub("courseID", ID, urlbase)
-                                urlbase <- sub("studentID", studentID, urlbase)
-                                urlbase <- sub("typeNM", type, urlbase)
-                                
-                                urlbase <- URLencode(urlbase)
-                                print(urlbase)
+                                url$path <- "api/v1/courses/courseID/analytics/users/studentID/typeNM"
+                                url$path <- sub("courseID", ID, url$path)
+                                url$path <- sub("studentID", studentID, url$path)
+                                url$path <- sub("typeNM", type, url$path)
                         }
                 } else {
                         if (!type %in% c("activity", "assignments", "student_summaries")) {
@@ -37,12 +33,9 @@ getAnalytics <- function(uri, ID, type = "activity", term = "current", course = 
                         } else if (type == "communication") {
                                 stop("Communciation type requires student ID.")
                         } else { 
-                                urlbase <- sub("uri", uri, "uri/api/v1/courses/courseID/analytics/typeNM?")
-                                urlbase <- sub("courseID", ID, urlbase)
-                                urlbase <- sub("typeNM", type, urlbase)
-                                
-                                urlbase <- URLencode(urlbase)
-                                print(urlbase)
+                                url$path <- "api/v1/courses/courseID/analytics/typeNM"
+                                url$path <- sub("courseID", ID, url$path)
+                                url$path <- sub("typeNM", type, url$path)
                         }
                 }
         }
@@ -52,25 +45,25 @@ getAnalytics <- function(uri, ID, type = "activity", term = "current", course = 
                 if (!type %in% c("activity", "grades", "statistics")) {
                         stop("Account analytics available for 'activity', 'grades', or 'statistics'")
                 } else {
-                        urlbase <- sub("uri", uri, "uri/api/v1/accounts/accountID/analytics/termID/typeNM?")
-                        urlbase <- sub("accountID", ID, urlbase)
+                        url$path <- "/api/v1/accounts/accountID/analytics/termID/typeNM"
+                        url$path <- sub("accountID", ID, url$path)
                         if (term == "terms/current" | term == "terms/completed") {
                                 term <- sub("terms/", "", term)
-                                urlbase <- sub("termID", term, urlbase)
+                                url$path <- sub("termID", term, url$path)
                         } else {
-                                urlbase <- sub("termID", term, urlbase)
+                                url$path <- sub("termID", term, url$path)
                         }
-                        urlbase <- sub("termID", term, urlbase)
-                        
-                        urlbase <- sub("typeNM", type, urlbase)
-                        
-                        urlbase <- URLencode(urlbase)
-                        print(urlbase)                
+                        url$path <- sub("termID", term, url$path)
+                        url$path <- sub("typeNM", type, url$path)
                 }
         }
 
+        url$query <- list(exclude = NULL)
+        
+        print(build_url(url))
+        
         ##Pass the url to the request processor
-        results <- processRequest(urlbase, ...)
+        results <- processRequest(url, ...)
         
         return(results)
 }

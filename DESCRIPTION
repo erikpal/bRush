@@ -1,0 +1,10 @@
+Package: bRush
+Title: A library for working with the Canvas Instructure API
+Version: 0.0.0.9001
+Authors@R: person("Erik", "Palmore", email = "erikpal@gmail.com", role = c("aut", "cre"))
+Description: This package allows you to use the Instructure Canvas API...
+Depends:
+    R (>= 3.2.1)
+License: What license is it under?
+LazyData: true
+RoxygenNote: 5.0.1

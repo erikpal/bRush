@@ -2,11 +2,11 @@
 #' 
 #' Get the users from a specified account.
 #' @param url The base url of a Canvas installation
-#' @param accountID Integer of the account ID to find sub-accounts for
+#' @param accountID Integer of the account ID to find users for
 #' @param search_term Filter results by partial name or full ID to match and return in the results list. Must be at least 3 characters.
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getUsers <- function(url, accountID, search_term = NULL, ...) {
+getAccountUsers <- function(url, accountID, search_term = NULL, ...) {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
