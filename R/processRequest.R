@@ -1,4 +1,4 @@
-#' Get Multipage Results - NEW VERSION
+#' Get Multipage Results
 #' 
 #' Takes a url constructed for API request, including url parameters to produce one 
 #' result from multiple requests across multiple pages.  The parameters of this 
@@ -73,9 +73,21 @@ processRequest <- function(url, body, method = "GET",
         }
         
         if (method == "EDIT") {
-                results <- data.frame()
-                ##Add the goods here if an edit function passes
-                print(results)
+                results <- NULL
+                
+                request <- PUT(url, 
+                                add_headers(Authorization = header),
+                                content_type_json(),
+                                body = body)
+                status <- http_status(request)   
+                
+                ##Deal with errors
+                checkErrors(status)  
+                
+                results <- content(request, as = "text")
+                results <- jsonlite::fromJSON(results, flatten = TRUE)
+                
+                return(results)
         }
         
         if (method == "CREATE") {

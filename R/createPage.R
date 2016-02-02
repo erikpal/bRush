@@ -1,8 +1,6 @@
 #' Create a new wiki page
 #' 
-#' Get course details for the account requesting. All include parameters (see API
-#' documentation) for this request have all been enabled and can be subsetted out 
-#' if not needed.
+#' Create a new wiki page for the provided course or group.
 #' @param url The base url of a Canvas installation
 #' @param ID Course or group id to create the page in
 #' @param title String of page title.
