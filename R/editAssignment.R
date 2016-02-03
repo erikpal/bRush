@@ -18,11 +18,13 @@
 #' @param notify_of_update Boolean to notify students that assignment content has changed.
 #' @param external_tool_tag_attributes Named list od external tool attributes.
 #' @param grading_type Character of grading type options (pass_fail, percent, letter_grade, gpa_scale, points)
+#' @param group_category_id ID of group to assign discussion to.
 #' @param due_at POSIXct object of date and time of due date
 #' @param lock_at POSIXct object of date and time of lock date
 #' @param unlock_at POSIXct object of date and time of unlock date
 #' @param assignment_group_id Integer of the assignment group to put assignment in.
 #' @param muted Boolean to mute assignment or not
+#' @param grade_group_students_individually Boolean to say group students will be graded individually.
 #' @param grading_standard_id Integer id of the grading standard used.
 #' @param ext_tool_url Character of external tool url if type is "external_tool".
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.
@@ -36,6 +38,7 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                            grading_type = NULL,
                            assignment_group_id = NULL,
                            grading_standard_id = NULL,
+                           group_category_id = NULL,
                            due_at = NULL,
                            lock_at = NULL,
                            unlock_at = NULL,
@@ -45,6 +48,7 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                            automatic_peer_reviews = NULL,
                            notify_of_update = NULL,
                            muted = NULL,
+                           grade_group_students_individual = NULL,
                            ext_tool_url = NULL,
                            ext_tool_new_tab = NULL){
         
@@ -52,20 +56,22 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
         ##Add in the api specific parameters
         require(httr)
         url <- parse_url(url)
-        url$path <- "/api/v1/courses/courseID/assignments/assignID"
+        url$path <- "api/v1/courses/courseID/assignments/assignID"
         url$path <- sub("courseID", courseID, url$path)
         url$path <- sub("assignID", assignID, url$path)
         
-        ##Build the JSON for the body of the
-        ##TODO: This is n't going to work b/c it doesn't match the spec yet, 
-        ##add logic for online type andmake sure the field names are correct.
+        ##Set a default if nothing provided
         if (!is.null(online_type) & is.null(type)) {type <- "online"}
+        
+        ##Warn that online submissions need a type
         if (!is.null(type)) {
                 if (type == "online") {
                         if (is.null(online_type)) {stop("Must provide online submission types as online_type")}
                         type <- online_type
                 }
         }
+        
+        ##Build JSON for any element provided
         require(jsonlite)
         body <- NULL
         body$assignment <- NULL
@@ -77,6 +83,7 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                 if(!is.null(grading_type)){body$assignment$grading_type = grading_type}
                 if(!is.null(assignment_group_id)){body$assignment$assignment_group_id = assignment_group_id}
                 if(!is.null(grading_standard_id)){body$assignment$grading_standard_id = grading_standard_id}
+                if(!is.null(group_category_id)){body$assignment$group_category_id = group_category_id}
                 if(!is.null(due_at)){body$assignment$description = due_at}
                 if(!is.null(lock_at)){body$assignment$lock_at = lock_at}
                 if(!is.null(unlock_at)){body$assignment$unlock_at = unlock_at}
@@ -85,7 +92,10 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                 if(!is.null(peer_reviews)){body$assignment$peer_reviews = peer_reviews}
                 if(!is.null(notify_of_update)){body$assignment$notify_of_update = notify_of_update}
                 if(!is.null(muted)){body$assignment$muted = muted}
+                if(!is.null(grade_group_students_individual)){body$assignment$grade_group_students_individual = grade_group_students_individual}
         
+        ##If an external_tool type is specified, pass the ext tool parameters
+        ##if provided
         if (!is.null(type)) {
                 if (type[1] == "external_tool") {
                         external_tool_tag_attributes <- NULL
@@ -94,10 +104,14 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                         body[[1]]$external_tool_tag_attributes <- external_tool_tag_attributes
                 }
         }
+        
+        ##Make the JSON
         body <- jsonlite::toJSON(body, auto_unbox = TRUE, POSIXt = "ISO8601")
         
+        ##Print the url and the JSON in the console
         print(build_url(url))
         print(body)
+        
         ##Pass the url to the request processor
         results <- processRequest(url, body, method = "EDIT")
         
