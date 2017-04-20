@@ -15,8 +15,34 @@ Canvas API Documentation is available here: <https://canvas.instructure.com/doc/
 Installation
 ------------
 
-Setup API Token
----------------
+bRush is not available on CRAN and can be installed directly from GitHub using the devtools package (which is available on CRAN).
+
+``` r
+devtools::install_github("erikpal/bRush")
+```
+
+Setup and use of API Token
+--------------------------
+
+To use this package, create an access token in Canvas by going to Account &gt; Settings &gt; Approved Integrations &gt; + New Access Token. I recommend not setting an expiration date.
+
+Place the token in a file called .Renviron as such:
+
+``` r
+CanvasApiKey = 7~ABcD123efG45hIJ78KLMno9PQrstuVwXyZ10
+```
+
+This method follows the best practice for developing API packages as documented here: <https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html>
+
+Alternatively, you may place the token in a text file called token.txt to be loaded from the working directory at the time needed.
+
+You may store multiple keys for multiple servers, and override the default name of "CanvasApiKey" by passing this arugument when making requests:
+
+``` r
+env_var_name = "NameOfApiKey"
+```
+
+The token management options are designed to give you flexibility in moving across installations. Note that keys created in production will be copied over to test and beta environments at their next scheduled copy, which makes it easier to work with a single key.
 
 Example Usage
 -------------
@@ -32,15 +58,15 @@ courseid <- mycourses$id[mycourses$name == "Introduction to R"]
 createAssignment(url, courseid, "Week One Homework")
 ```
 
-### Example Two: Get a subaccount ID and then get stats for it within a term (id supplied)
+### Example Two: Get a subaccount ID and then get stats for it within a term (term id 1234 supplied)
 
 ``` r
 library(bRush)
 
 url <- "https://canvas.instructure.com/"
 accounts <- getAccounts(url)
-accountid <- accounts$id[accounts$name == "Organizations"]
-stats <- getAnalytics(url, accountid, type = "statistics", term = 1111)
+accountid <- accounts$id[accounts$name == "Science Department"]
+stats <- getAnalytics(url, accountid, type = "statistics", term = 1234)
 ```
 
 ### Example Three: Use with dplyr for quick access
@@ -50,7 +76,7 @@ library(bRush)
 library(dplyr)
 
 url <- "https://canvas.instructure.com/"
-accountid <- getAccounts(uri$beta) %>% filter(name == "Organizations") %>% .[["id"]]
+accountid <- getAccounts(url) %>% filter(name == "Science Department") %>% .[["id"]]
 ```
 
 Status of Project
