@@ -20,8 +20,6 @@ getSubaccounts <- function(url, accountID, recursive = FALSE, ...) {
                 url$query <- list(recursive = TRUE)
         }
         
-        print(build_url(url))
-        
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
         

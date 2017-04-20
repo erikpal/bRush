@@ -12,13 +12,12 @@ getReports <- function(url, accountID, titlenm = "", link = FALSE, ...) {
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/accounts/accountID/reports"
         url$path <- sub("accountID", accountID, url$path)
 
         url$query <- list(exclude = NULL)
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

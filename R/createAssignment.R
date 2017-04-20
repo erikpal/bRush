@@ -2,7 +2,7 @@
 #' 
 #' Create a new assignment for the provided course.
 #' @param url The base url of a Canvas installation.
-#' @param ID Course ID to create the assignment in.
+#' @param courseID Course ID to create the assignment in.
 #' @param name Character of the name of the assignment
 #' @param description Character description of the assignments, supports HTML.
 #' @param points_possible Integer of the maximum number of points possible
@@ -29,7 +29,7 @@
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createAssignment <- function(url, ID, name, description = "",
+createAssignment <- function(url, courseID, name, description = "",
                              points_possible = "",
                              type =  "online",
                              online_type = c("online_upload", "online_text_entry"),
@@ -49,14 +49,15 @@ createAssignment <- function(url, ID, name, description = "",
                              muted = FALSE,
                              grade_group_students_individual = FALSE,
                              ext_tool_url = NULL,
-                             ext_tool_new_tab = FALSE){
+                             ext_tool_new_tab = FALSE, ...){
 
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
-        url$path <- "api/v1/courses/ID/assignments"
-        url$path <- sub("ID", ID, url$path)
+        url$path <- "api/v1/courses/courseID/assignments"
+        url$path <- sub("courseID", courseID, url$path)
         
         ##Set type to the online type options provided
         ##This is b/c online online types can have multiple item
@@ -101,12 +102,8 @@ createAssignment <- function(url, ID, name, description = "",
         ##Convert ot JSON
         body <- jsonlite::toJSON(body, auto_unbox = TRUE, POSIXt = "ISO8601")
         
-        ##Print the url and the JSON in the console
-        print(build_url(url))
-        print(body)
-        
         ##Pass the url to the request processor
-        results <- processRequest(url, body, method = "CREATE")
+        results <- processRequest(url, body, method = "CREATE", ...)
         
         return(results)
 }

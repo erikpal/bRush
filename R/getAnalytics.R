@@ -10,10 +10,8 @@
 #' @export
 getAnalytics <- function(url, ID, type = "activity", term = "current", 
                          course = FALSE, studentID = NULL, ...) {
+        require(httr)
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-
         term <- paste0("terms/", term)
         url <- parse_url(url)
         
@@ -60,10 +58,10 @@ getAnalytics <- function(url, ID, type = "activity", term = "current",
 
         url$query <- list(exclude = NULL)
         
-        print(build_url(url))
-        
         ##Pass the url to the request processor
-        results <- processRequest(url, ...)
-        
+        ##Adding page limitors b/c this seems to not require multiple pages to pull and creates 
+        ##errors. This isn't tested on all formats, but appears to work well for course-level reports.
+        results <- processRequest(url, page = 1, end_page = 1, ...)
+
         return(results)
 }

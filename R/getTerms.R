@@ -23,8 +23,6 @@ getTerms <- function(url, accountID, state = NULL, ...) {
         url$path <- sub("accountID", accountID, url$path)
         url$query <- list(workflow_state = state)
         
-        print(build_url(url))
-        
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

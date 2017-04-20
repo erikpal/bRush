@@ -14,6 +14,7 @@ getMyCourses <- function(url, type = NULL, role_id = NULL, state = NULL, ...) {
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/courses"
 
@@ -32,8 +33,6 @@ getMyCourses <- function(url, type = NULL, role_id = NULL, state = NULL, ...) {
                           enrollment_type = type,
                           enrollment_role_id = role_id,
                           "state[]" = state)
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

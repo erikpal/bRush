@@ -50,11 +50,12 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                            muted = NULL,
                            grade_group_students_individual = NULL,
                            ext_tool_url = NULL,
-                           ext_tool_new_tab = NULL){
+                           ext_tool_new_tab = NULL, ...){
         
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/assignments/assignID"
         url$path <- sub("courseID", courseID, url$path)
@@ -108,12 +109,8 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
         ##Make the JSON
         body <- jsonlite::toJSON(body, auto_unbox = TRUE, POSIXt = "ISO8601")
         
-        ##Print the url and the JSON in the console
-        print(build_url(url))
-        print(body)
-        
         ##Pass the url to the request processor
-        results <- processRequest(url, body, method = "EDIT")
+        results <- processRequest(url, body, method = "EDIT", ...)
         
         return(results)
 }

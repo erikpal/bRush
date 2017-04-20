@@ -1,20 +1,20 @@
 #' Upload a course file
 #' Upload
 #' @param url The base url of a Canvas installation
-#' @param ID Course id to create upload the file to
+#' @param courseID Course id to create upload the file to
 #' @param name The name of the file upon upload.
 #' @param filelocal The path to the file.
 #' @param path Path of the folder in course files.
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createFile <- function(url, ID, name = "", filelocal = "", path = "") {
+createFile <- function(url, courseID, name = "", filelocal = "", path = "", ...) {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
         url <- parse_url(url)
-        url$path <- "api/v1/courses/ID/files"
-        url$path <- sub("ID", ID, url$path)
+        url$path <- "api/v1/courses/courseID/files"
+        url$path <- sub("courseID", courseID, url$path)
         
         ##Build the JSON for the body of the 
         require(jsonlite)
@@ -37,7 +37,7 @@ createFile <- function(url, ID, name = "", filelocal = "", path = "") {
         print(url)
         
         ##Pass the url to the request processor
-        results <- processRequest(url, body, method = "UPLOAD")
+        results <- processRequest(url, body, method = "UPLOAD", ...)
         
         return(results)
 }

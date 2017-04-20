@@ -34,8 +34,6 @@ getDiscussionTopics <- function(url, courseID,
                 }
         }
         
-        print(build_url(url))
-        
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
         

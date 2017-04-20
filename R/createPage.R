@@ -14,11 +14,12 @@
 createPage <- function(url, ID, title = NULL, body = NULL, 
                         edit = "teachers", notify = FALSE,
                         publish = TRUE,
-                        front = FALSE) {
+                        front = FALSE, ...) {
         
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/courses/ID/pages"
         url$path <- sub("ID", ID, url$path)
@@ -38,9 +39,10 @@ createPage <- function(url, ID, title = NULL, body = NULL,
         body <- toJSON(body, auto_unbox = TRUE)
 
         print(build_url(url))
+        print(body)
 
         ##Pass the url to the request processor
-        results <- processRequest(url, body, method = "CREATE")
+        results <- processRequest(url, body, method = "CREATE", ...)
         
         return(results)
 }

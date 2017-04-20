@@ -21,8 +21,6 @@ getDiscussionEntries <- function(url, courseID, topicID, ...) {
         
         url$query <- list(exclude = NULL)
         
-        print(build_url(url))
-        
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
         

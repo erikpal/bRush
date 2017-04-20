@@ -21,6 +21,7 @@ getCourseUsers <- function(url, courseID, search_term = NULL, user_ids = NULL,
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/users"
         url$path <- sub("courseID", courseID, url$path)
@@ -50,8 +51,6 @@ getCourseUsers <- function(url, courseID, search_term = NULL, user_ids = NULL,
                         warning("Search term must be three or more characters.")
                 }
         }
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

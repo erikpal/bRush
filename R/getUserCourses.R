@@ -13,6 +13,7 @@ getUserCourses <- function(url, userID, state = NULL, ...) {
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/users/userID/courses"
         url$path <- sub("userID", userID, url$path)
@@ -27,8 +28,6 @@ getUserCourses <- function(url, userID, state = NULL, ...) {
                           "include[]" = "favorites",
                           "include[]" = "total_scores",
                           "state[]" = state)
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

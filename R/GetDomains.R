@@ -14,8 +14,6 @@ getDomains <- function(url, name = NULL, domain = NULL, ...) {
         url <- parse_url(url)
         url$path <- "api/v1/accounts/search"
         url$query <- list(name = name, domain = domain)
-
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

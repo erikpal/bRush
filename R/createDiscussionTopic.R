@@ -52,7 +52,7 @@ createDiscussionTopic <- function(url, ID, title, message = "",
                                   grading_type = "points",
                                   grading_standard_id = NULL,
                                   due_at = "",
-                                  unlock_at = ""){
+                                  unlock_at = "", ...){
         
         ##Build the base url for the request
         ##Add in the api specific parameters
@@ -100,12 +100,8 @@ createDiscussionTopic <- function(url, ID, title, message = "",
         ##Convet to JSON
         body <- jsonlite::toJSON(body, auto_unbox = TRUE, POSIXt = "ISO8601")
         
-        ##Print the url and the JSON in the console
-        print(build_url(url))
-        print(body)
-        
         ##Pass the url to the request processor
-        results <- processRequest(url, body, method = "CREATE")
+        results <- processRequest(url, body, method = "CREATE", ...)
         
         return(results)
 }

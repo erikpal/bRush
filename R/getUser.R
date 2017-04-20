@@ -11,13 +11,12 @@ getUser <- function(url, userID, ...) {
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/users/userID"
         url$path <- sub("userID", userID, url$path)
 
         url$query <- list(exclude = NULL)
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

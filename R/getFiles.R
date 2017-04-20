@@ -16,6 +16,7 @@ getFiles <- function(url, ID, IDtype = "course", fileID = NULL,
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/TYPE/ID/files"
 
@@ -69,8 +70,7 @@ getFiles <- function(url, ID, IDtype = "course", fileID = NULL,
                         warning("Search term must be three or more characters.")
                 }
         }
-        print(build_url(url))
-        
+
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
         

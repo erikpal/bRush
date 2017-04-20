@@ -15,6 +15,7 @@ getAssignments <- function(url, courseID, search_term = NULL, bucket = NULL, ...
         ##Build the base url for the request
         ##Add in the api specific parameters
         require(httr)
+        
         url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/assignments"
         url$path <- sub("courseID", courseID, url$path)
@@ -32,8 +33,6 @@ getAssignments <- function(url, courseID, search_term = NULL, bucket = NULL, ...
                         warning("Search term must be three or more characters.")
                 }
         }
-        
-        print(build_url(url))
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
