@@ -7,28 +7,46 @@
 #' @param per_page Number of results requested at one time (max: 100)
 #' @param page Page number to start requests from
 #' @param end_page Page number to end requests
+#' @param env_var_name Name of the API key saved in .Renviron
+#' @param verbose Enable verbose mode
 #' @export
 
 ##TODO: per_page set to 1 causes problems
 processRequest <- function(url, body, method = "GET",
-                           per_page = 100, page = 1, end_page = NULL) {
+                           per_page = 100, page = 1, end_page = NULL, 
+                           env_var_name = "CanvasApiKey", 
+                           verbose = FALSE) {
         require(httr)
         require(jsonlite)
         require(dplyr)
         
-        token <- loadToken()##Load  token from text file in the working directory
+        token <- loadToken(env_var_name)##Load  token from text file in the working directory
         header <- paste("Bearer", token)
         
+        if(verbose == TRUE) {
+                print(build_url(url))
+        }
+
         if (method == "GET") {
-                results <- data.frame()
+                results <- list()
                 while (page > 0) {
                         url$query <- c(url$query, page = page, per_page = per_page)
 
                         request <- GET(url, add_headers(Authorization = header))
                         status <- http_status(request)
                         
+                        
                         ##Deal with errors
                         checkErrors(status)
+                        
+                        #For debugging, etc. - make a function and add to other methods
+                        if(verbose == TRUE) {
+                                print(Sys.time())
+                                print(paste("Page:", page))
+                                print(paste("Results:", length(content(request))))
+                                print(paste("$headers$`x-request-cost`:", request$all_headers[[1]]$headers$`x-request-cost`))
+                                print(paste("$headers$`x-rate-limit-remaining`:", request$all_headers[[1]]$headers$`x-rate-limit-remaining`))
+                        }
                         
                         x <- content(request, as = "text")
                         x <- jsonlite::fromJSON(x, flatten = TRUE)
@@ -38,14 +56,15 @@ processRequest <- function(url, body, method = "GET",
                         ##the list is passed as results.
                         if (!is.data.frame(x)) {
                                 if (length(x) == 0) {
-                                        stop("No Results")
+                                        warning("No Results")
                                 } else {
-                                        results <- x
+                                        results[[page]] <- x
                                         break
                                 }
                         }
                         
-                        results <- bind_rows(results, x)##Build the data through loops
+                        #results <- bind_rows(results, x)##Build the data frame through loops
+                        results[[page]] <- x 
                         
                         ##Check to make sure end page is after start page
                         if (!is.null(end_page)) {
@@ -67,6 +86,10 @@ processRequest <- function(url, body, method = "GET",
                         } else {#Set page to 0 to stop look if per_page is less than 100% full
                                 page <- 0
                         }
+                }
+                
+                if (is.data.frame(results[[1]])) {
+                        results <- do.call(rbind, results)
                 }
                 
                 return(results)
