@@ -8,7 +8,7 @@ bRush is an R client to interface with the Instructure Canvas LMS.
 
 For most functions, bRush returns a data frame. Combining bRush with dplyr makes it quick and easy to subset pesky unknown ID numbers (course, assignment, etc.) for the supplied known name.
 
-As a client for R, bRush makes assumptions on behalf of the user that they are interested in as much data from the requests as possible. As such, unless otherwise specified, requests are recursively processed until all results for a requests have been acheived (if there are 926 courses, bRush will make the call ten times gathering 100 results each time, and 26 the last). Additonal, any "include" options are set to true by default.
+As a client for R, bRush makes assumptions on behalf of the user that they are interested in as much data from the requests as possible. Requests are recursively processed until all results for a requests have been acheived (if there are 926 courses, bRush will make the call 93 times gathering 10 results each time, and 6 the last). Additonal, any "include" options are set to true by default.
 
 Canvas API Documentation is available here: <https://canvas.instructure.com/doc/api/index.html>
 

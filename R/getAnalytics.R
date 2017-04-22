@@ -61,7 +61,7 @@ getAnalytics <- function(url, ID, type = "activity", term = "current",
         ##Pass the url to the request processor
         ##Adding page limitors b/c this seems to not require multiple pages to pull and creates 
         ##errors. This isn't tested on all formats, but appears to work well for course-level reports.
-        results <- processRequest(url, page = 1, end_page = 1, ...)
+        results <- processRequest(url, ...)
 
         return(results)
 }

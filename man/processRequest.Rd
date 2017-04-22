@@ -4,19 +4,19 @@
 \alias{processRequest}
 \title{Get Multipage Results}
 \usage{
-processRequest(url, body, method = "GET", per_page = 100, page = 1,
-  end_page = NULL, env_var_name = "CanvasApiKey", verbose = FALSE)
+processRequest(url, body, method = "GET", env_var_name = "CanvasApiKey",
+  verbose = FALSE)
 }
 \arguments{
+\item{env_var_name}{Name of the API key saved in .Renviron}
+
+\item{verbose}{Enable verbose mode}
+
 \item{per_page}{Number of results requested at one time (max: 100)}
 
 \item{page}{Page number to start requests from}
 
 \item{end_page}{Page number to end requests}
-
-\item{env_var_name}{Name of the API key saved in .Renviron}
-
-\item{verbose}{Enable verbose mode}
 }
 \description{
 Takes a url constructed for API request, including url parameters to produce one 

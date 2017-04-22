@@ -13,7 +13,6 @@
 
 ##TODO: per_page set to 1 causes problems
 processRequest <- function(url, body, method = "GET",
-                           per_page = 100, page = 1, end_page = NULL, 
                            env_var_name = "CanvasApiKey", 
                            verbose = FALSE) {
         require(httr)
@@ -24,72 +23,72 @@ processRequest <- function(url, body, method = "GET",
         header <- paste("Bearer", token)
         
         if(verbose == TRUE) {
-                print(build_url(url))
+                #print(build_url(url))
         }
 
         if (method == "GET") {
-                results <- list()
-                while (page > 0) {
-                        url$query <- c(url$query, page = page, per_page = per_page)
 
-                        request <- GET(url, add_headers(Authorization = header))
-                        status <- http_status(request)
+                results <- list()
+                #url$query <- c(url$query)
+                continue <- TRUE
+                page <- 0
+                
+                while (continue == TRUE) {
                         
+                        page <- page + 1
+                        
+                        response <- GET(url, add_headers(Authorization = header))
+                        status <- http_status(response)
                         
                         ##Deal with errors
                         checkErrors(status)
                         
-                        #For debugging, etc. - make a function and add to other methods
-                        if(verbose == TRUE) {
-                                print(Sys.time())
-                                print(paste("Page:", page))
-                                print(paste("Results:", length(content(request))))
-                                print(paste("$headers$`x-request-cost`:", request$all_headers[[1]]$headers$`x-request-cost`))
-                                print(paste("$headers$`x-rate-limit-remaining`:", request$all_headers[[1]]$headers$`x-rate-limit-remaining`))
+                        if(verbose == TRUE) {bRushVerbose(response)}
+                        
+                        content <- content(response, as = "text")
+                        content <- jsonlite::fromJSON(content, flatten = TRUE)
+                        
+                        resultkey <- tryCatch({
+                                suppressMessages({
+                                        content <- as.data.frame(content)
+                                })
+                        }, 
+                        error = function(e) {
+                                NA_character_
                         }
-                        
-                        x <- content(request, as = "text")
-                        x <- jsonlite::fromJSON(x, flatten = TRUE)
-                        
+                        )
+
                         ##fromJSON doesn't convert single items to data frames
                         ##This is a temporary fix for length based issues so that
                         ##the list is passed as results.
-                        if (!is.data.frame(x)) {
-                                if (length(x) == 0) {
-                                        warning("No Results")
+                        if (!is.data.frame(content)) {
+                                if (length(content) == 0) {
+                                        #warning("No Results")
+                                        break
                                 } else {
-                                        results[[page]] <- x
+                                        results[[page]] <- content
                                         break
                                 }
                         }
                         
-                        #results <- bind_rows(results, x)##Build the data frame through loops
-                        results[[page]] <- x 
+                        results[[page]] <- content
                         
-                        ##Check to make sure end page is after start page
-                        if (!is.null(end_page)) {
-                                if (end_page < page) {stop("Requested end_page is less than the start page.")}
+                        if(is.null(response$headers$link)) {break}
+                        
+                        page_links <- paginationLinks(response)
+
+                        if ("next" %in% names(page_links)) {
+                                url <- page_links[["next"]]
+                        } else {
+                                continue <- FALSE
                         }
                         
-                        ##If the per_page number is at 100%, then set page +1 for another loop
-                        if (length(content(request)) >= per_page) {
-                                if (!is.null(end_page)){##If an end page is provided...
-                                        if (page == end_page) {##...check to see if we're there
-                                                page <- 0
-                                        } else {
-                                                page <- page + 1
-                                        }
-                                } else {
-                                        page <- page + 1
-                                }
-                                
-                        } else {#Set page to 0 to stop look if per_page is less than 100% full
-                                page <- 0
-                        }
                 }
                 
                 if (is.data.frame(results[[1]])) {
-                        results <- do.call(rbind, results)
+                        results <- bind_rows(results)
+                        #results <- do.call(rbind, results)
+                        #row.names(results) <- NULL
                 }
                 
                 return(results)
@@ -105,7 +104,9 @@ processRequest <- function(url, body, method = "GET",
                 status <- http_status(request)   
                 
                 ##Deal with errors
-                checkErrors(status)  
+                checkErrors(status)
+                
+                if(verbose == TRUE) {bRushVerbose(request)}
                 
                 results <- content(request, as = "text")
                 results <- jsonlite::fromJSON(results, flatten = TRUE)
@@ -124,6 +125,8 @@ processRequest <- function(url, body, method = "GET",
                 
                 ##Deal with errors
                 checkErrors(status)  
+                
+                if(verbose == TRUE) {bRushVerbose(request)}
                 
                 results <- content(request, as = "text")
                 results <- jsonlite::fromJSON(results, flatten = TRUE)
@@ -149,6 +152,8 @@ processRequest <- function(url, body, method = "GET",
                 
                 ##Deal with errors
                 checkErrors(status) 
+                
+                if(verbose == TRUE) {bRushVerbose(request)}
                 
                 results <- content(request, as = "text")
                 results <- jsonlite::fromJSON(results, flatten = TRUE)

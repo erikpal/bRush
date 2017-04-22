@@ -24,8 +24,6 @@ createFile <- function(url, courseID, name = "", filelocal = "", path = "", ...)
         )
         body <- toJSON(body, auto_unbox = TRUE)
         
-        print(build_url(url))
-        
         ##Pass the url to the request processor
         results <- processRequest(url, body, method = "CREATE")
         
@@ -33,8 +31,8 @@ createFile <- function(url, courseID, name = "", filelocal = "", path = "", ...)
         results$filename <- filelocal 
         body <- results##rename before pass
         url <- results$upload_url
-        
-        print(url)
+
+        #url <- parse_url(url)
         
         ##Pass the url to the request processor
         results <- processRequest(url, body, method = "UPLOAD", ...)
