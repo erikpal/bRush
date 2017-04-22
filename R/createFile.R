@@ -32,7 +32,7 @@ createFile <- function(url, courseID, name = "", filelocal = "", path = "", ...)
         body <- results##rename before pass
         url <- results$upload_url
 
-        #url <- parse_url(url)
+        url <- parse_url(url)
         
         ##Pass the url to the request processor
         results <- processRequest(url, body, method = "UPLOAD", ...)

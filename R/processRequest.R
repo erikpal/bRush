@@ -23,7 +23,7 @@ processRequest <- function(url, body, method = "GET",
         header <- paste("Bearer", token)
         
         if(verbose == TRUE) {
-                #print(build_url(url))
+        print(build_url(url))
         }
 
         if (method == "GET") {
@@ -117,18 +117,18 @@ processRequest <- function(url, body, method = "GET",
         if (method == "CREATE") {
                 results <- NULL
 
-                request <- POST(url, 
+                response <- POST(url, 
                                 add_headers(Authorization = header),
                                 content_type_json(),
                                 body = body)
-                status <- http_status(request)   
+                status <- http_status(response)   
                 
                 ##Deal with errors
                 checkErrors(status)  
                 
-                if(verbose == TRUE) {bRushVerbose(request)}
+                if(verbose == TRUE) {bRushVerbose(response)}
                 
-                results <- content(request, as = "text")
+                results <- content(response, as = "text")
                 results <- jsonlite::fromJSON(results, flatten = TRUE)
                 
                 return(results)
@@ -138,27 +138,35 @@ processRequest <- function(url, body, method = "GET",
                 results <- body##rename after pass
                 params <- results$upload_params
                 params$file <- upload_file(results$filename)##Add the file name to the needed params
-                request <- POST(url, 
+                response <- POST(url, 
                                 content_type("multipart/form-data"),
                                 encode = "multipart",
                                 body = params)
-
-                if (request$all_headers[[2]]$status == 303) {
-                        request <- GET(request$url, 
-                                       add_headers(Authorization = header))
-                }
                 
-                status <- http_status(request)   
+                status <- http_status(response)   
                 
                 ##Deal with errors
                 checkErrors(status) 
                 
-                if(verbose == TRUE) {bRushVerbose(request)}
+                if(verbose == TRUE) {bRushVerbose(response)}
                 
-                results <- content(request, as = "text")
-                results <- jsonlite::fromJSON(results, flatten = TRUE)
+                if (response$all_headers[[2]]$status == 303) {
+                        ##This thisrd step is returning a bad request and I can't figure out why
+                        url <-  response$all_headers[[2]]$headers$location
+                        url <- parse_url(url)
+                        response <- POST(url, add_headers(Authorization = header))
+                        status <- http_status(response)   
+                        checkErrors(status) 
+                        if(verbose == TRUE) {bRushVerbose(response)}
+                }
                 
-                return(results)
+                ##Until the third step is working
+                ##results <- content(response, as = "text")
+                ##results <- jsonlite::fromJSON(results, flatten = TRUE)
+                ##return(results)
+                
+                return(response)
+                
         }
         
         if (!method %in% c("GET", "CREATE", "EDIT", "UPLOAD")) {
