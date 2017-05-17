@@ -1,4 +1,4 @@
-#' Create a new outcome in an outcome group
+        #' Create a new outcome in an outcome group
 #' 
 #' Create a new outcome in an outcome group.
 #' @param url The base url of a Canvas installation.
