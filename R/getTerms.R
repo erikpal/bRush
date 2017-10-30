@@ -1,6 +1,6 @@
 #' Get Terms
 #' 
-#' Get terms in a specified account.
+#' Get terms in the specified account.
 #' @param url The base url of a Canvas installation
 #' @param accountID Integer of the account ID to find sub-accounts for
 #' @param state Optional string "active" or "deleted" to limit request
