@@ -2,21 +2,18 @@
 #' 
 #' Create a content migration with migrator type and a settings list. Does not
 #' currently support file uploads.  Limited testing conducted on various migrators.
-#' @param url The base url of a Canvas installation
 #' @param ID ID of context to import into.
 #' @param type String of type - course, account, group, or user
 #' @param migration_type String of migrator type
 #' @param settings Named list of settings for the migrator
+#' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createMigration <- function(url, ID, type = "course", 
+createMigration <- function(ID, type = "course", 
                             migration_type = "course_copy_importer", 
-                            settings, ...) {
+                            settings, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
         
         url$path <- "api/v1/TYPE/ID/content_migrations"
         

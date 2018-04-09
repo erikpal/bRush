@@ -1,7 +1,6 @@
 #' Create a new assignment
 #' 
 #' Create a new assignment for the provided course.
-#' @param url The base url of a Canvas installation.
 #' @param courseID Course ID to create the assignment in.
 #' @param name Character of the name of the assignment
 #' @param description Character description of the assignments, supports HTML.
@@ -27,9 +26,10 @@
 #' @param grade_group_students_individually Boolean to say group students will be graded individually.
 #' @param ext_tool_url Character of external tool url if type is "external_tool".
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createAssignment <- function(url, courseID, name, description = "",
+createAssignment <- function(courseID, name, description = "",
                              points_possible = "",
                              type =  "online",
                              online_type = c("online_upload", "online_text_entry"),
@@ -49,13 +49,11 @@ createAssignment <- function(url, courseID, name, description = "",
                              muted = FALSE,
                              grade_group_students_individual = FALSE,
                              ext_tool_url = NULL,
-                             ext_tool_new_tab = FALSE, ...){
+                             ext_tool_new_tab = FALSE, 
+                             server = "test", ...){
 
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/assignments"
         url$path <- sub("courseID", courseID, url$path)
         

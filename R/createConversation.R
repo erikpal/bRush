@@ -1,19 +1,17 @@
 #' Create a new conversation
 #' 
 #' Create a single recipient conversation
-#' @param url The base url of a Canvas installation
 #' @param userID User id of person to message
 #' @param subject Character of conversation subject
 #' @param body Character of body content
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createConversation <- function(url, userID, subject = NULL, body = NULL, ...) {
+
+createConversation <- function(userID, subject = NULL, body = NULL, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "/api/v1/conversations"
 
         ##Build the JSON for the body of the 

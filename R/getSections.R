@@ -2,16 +2,15 @@
 #' 
 #' Get sections for the provided course. All includes enabled: students, avatar_url, enrollments,
 #' total_students, and passback_status.
-#' @param url The base url of a Canvas installation
 #' @param courseID Course ID to find assignments for
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getSections <- function(url, courseID, ...) {
+
+getSections <- function(courseID, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "api/v1/courses/courseID/sections"
         url$path <- sub("courseID", courseID, url$path)
         

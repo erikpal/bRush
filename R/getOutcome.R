@@ -1,16 +1,15 @@
 #' Show the details of an outcome
 #' 
 #' Get a list of outcomes groups in a course or account.
-#' @param url The base url of a Canvas installation
 #' @param ID Outcome ID
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getOutcome <- function(url, ID, ...) {
+
+getOutcome <- function(ID, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "/api/v1/outcomes/ID"
         url$path <- sub("ID", ID, url$path)
 

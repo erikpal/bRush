@@ -4,14 +4,14 @@
 \alias{getPage}
 \title{Get a specific page}
 \usage{
-getPage(url, courseID, pageID, ...)
+getPage(courseID, pageID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course or group ID of page}
 
-\item{pageID}{Page ID number}
+\item{pageID}{Page ID number or title}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

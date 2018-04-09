@@ -1,18 +1,15 @@
 #' Get details of a specific user
 #' 
-#' Get user details for the provided user id. 
-#' @param url The base url of a Canvas installation
+#' Get user details for the provided user id. NOTE: Returns a list.
 #' @param userID User ID to get details for
+#' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-##TODO: This technically works but returns an error in processRequest
-getUser <- function(url, userID, ...) {
+
+getUser <- function(userID, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/users/userID"
         url$path <- sub("userID", userID, url$path)
 

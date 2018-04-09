@@ -4,17 +4,17 @@
 \alias{getTerms}
 \title{Get Terms}
 \usage{
-getTerms(url, accountID, state = NULL, ...)
+getTerms(accountID, state = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{accountID}{Integer of the account ID to find sub-accounts for}
 
 \item{state}{Optional string "active" or "deleted" to limit request}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get terms in a specified account.
+Get terms in the specified account.
 }

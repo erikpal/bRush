@@ -1,17 +1,16 @@
 #' Get all outcome links for a context
 #' 
-#' Get a list of outcomes groups in a course or account.
-#' @param url The base url of a Canvas installation
+#' Get a list of outcomes in a course or account.
 #' @param ID Course or account ID to retreive outcomes groups from
 #' @param type Character of "course" or "account"
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getOutcomeLinks <- function(url, ID, type = "account", ...) {
+
+getOutcomeLinks <- function(ID, type = "account", server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "/api/v1/TYPE/ID/outcome_group_links"
         url$path <- sub("ID", ID, url$path)
         

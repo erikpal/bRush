@@ -4,10 +4,10 @@
 \alias{getAccounts}
 \title{Get Accounts}
 \usage{
-getAccounts(url, ...)
+getAccounts(server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

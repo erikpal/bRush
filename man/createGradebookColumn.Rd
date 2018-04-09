@@ -4,11 +4,10 @@
 \alias{createGradebookColumn}
 \title{Create a custom grade book column}
 \usage{
-createGradebookColumn(url, ID, title = NULL, position = 1, hidden = FALSE)
+createGradebookColumn(ID, title = NULL, position = 1, hidden = FALSE,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Course id to create the page in}
 
 \item{title}{String of column title.}
@@ -16,6 +15,8 @@ createGradebookColumn(url, ID, title = NULL, position = 1, hidden = FALSE)
 \item{position}{Integer of column position}
 
 \item{hidden}{Boolean of whether the column is hidden or not}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

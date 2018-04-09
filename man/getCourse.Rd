@@ -4,15 +4,15 @@
 \alias{getCourse}
 \title{Get a single course}
 \usage{
-getCourse(url, courseID, ...)
+getCourse(courseID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{The base url of a Canvas installation}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get details of a single course
+Get details of a single course.
 }

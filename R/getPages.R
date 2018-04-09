@@ -1,21 +1,21 @@
 #' Get pages of a course
 #' 
 #' Get a list of pages in course or group.
-#' @param url The base url of a Canvas installation
 #' @param ID Course or group ID to retreiv pages of
 #' @param sort Character of how to sort list ("title","created_at","updated_at")
 #' @param order Character of order to sort ("asc","desc")
 #' @param search_term Filter results by partial title. Must be at least 3 characters.
 #' @param published Boolean to include only published pages
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getPages <- function(url, ID, sort = NULL, order = NULL, 
-                                 search_term = NULL, published = NULL, ...) {
+
+getPages <- function(ID, sort = NULL, order = NULL, 
+                     search_term = NULL, published = NULL, 
+                     server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+
         url$path <- "api/v1/courses/ID/pages"
         url$path <- sub("ID", ID, url$path)
 

@@ -2,19 +2,19 @@
 % Please edit documentation in R/getMigrators.R
 \name{getMigrators}
 \alias{getMigrators}
-\title{List migrators}
+\title{List migrations}
 \usage{
-getMigrators(url, ID, type = "course", ...)
+getMigrators(ID, type = "course", server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Integer of the account ID to find sub-accounts for}
 
 \item{type}{String of type - course, account, group, or user}
 
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get terms in a specified account.
+List content migrations.
 }

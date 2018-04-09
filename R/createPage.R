@@ -1,7 +1,6 @@
 #' Create a new wiki page
 #' 
 #' Create a new wiki page for the provided course or group.
-#' @param url The base url of a Canvas installation
 #' @param ID Course or group id to create the page in
 #' @param title String of page title.
 #' @param body String of body content.
@@ -9,18 +8,18 @@
 #' @param notify Boolean to specify whether users should be notified of creations
 #' @param publish Boolean to publish the page after creating.
 #' @param front Boolean to set page as the front page
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createPage <- function(url, ID, title = NULL, body = NULL, 
-                        edit = "teachers", notify = FALSE,
-                        publish = TRUE,
-                        front = FALSE, ...) {
+
+createPage <- function(ID, title = NULL, body = NULL, 
+                       edit = "teachers", notify = FALSE,
+                       publish = TRUE,
+                       front = FALSE, 
+                       server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/courses/ID/pages"
         url$path <- sub("ID", ID, url$path)
 

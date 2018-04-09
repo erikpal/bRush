@@ -4,13 +4,11 @@
 \alias{enrollUser}
 \title{Enroll a user in a section or course}
 \usage{
-enrollUser(url, ID, user_id, course_section_id = "",
-  type = "StudentEnrollment", enrollment_state = "active",
-  limit_privileges = TRUE, notify = "")
+enrollUser(ID, user_id, course_section_id = "", type = "StudentEnrollment",
+  enrollment_state = "active", limit_privileges = TRUE, notify = "",
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{ID}{Course ID for enrollment}
 
 \item{user_id}{ID of the user to be enrolled}
@@ -24,6 +22,8 @@ enrollUser(url, ID, user_id, course_section_id = "",
 \item{limit_privileges}{Boolean, if true, the enrollment will only allow the user to see and interact with users enrolled in the section given by course_section_id}
 
 \item{notify}{Boolean, if true, a notification will be sent to the enrolled user.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

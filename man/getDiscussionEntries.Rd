@@ -4,14 +4,14 @@
 \alias{getDiscussionEntries}
 \title{Get discussions topic entries from a course}
 \usage{
-getDiscussionEntries(url, courseID, topicID, ...)
+getDiscussionEntries(courseID, topicID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find assignments for}
 
 \item{topicID}{Topic Id to return the entries of}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

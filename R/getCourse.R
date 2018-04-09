@@ -1,17 +1,14 @@
 #' Get a single course
 #' 
-#' Get details of a single course
-#' @param url The base url of a Canvas installation
+#' Get details of a single course.
 #' @param courseID The base url of a Canvas installation
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getCourse <- function(url, courseID, ...) {
+getCourse <- function(courseID, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        
-        url <- parse_url(url)
+        url <- loadURL(server)
+
         url$path <- "/api/v1/courses/courseID"
         url$path <- sub("courseID", courseID, url$path)
         

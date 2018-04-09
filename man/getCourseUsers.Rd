@@ -4,12 +4,11 @@
 \alias{getCourseUsers}
 \title{Get users from a course}
 \usage{
-getCourseUsers(url, courseID, search_term = NULL, user_ids = NULL,
-  test_student = FALSE, type = NULL, role_id = NULL, state = NULL, ...)
+getCourseUsers(courseID, search_term = NULL, user_ids = NULL,
+  test_student = FALSE, type = NULL, role_id = NULL, state = NULL,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find users for}
 
 \item{search_term}{Filter results by partial course name, code, or full ID to match and return in the results list. Must be at least 3 characters.}
@@ -23,6 +22,8 @@ getCourseUsers(url, courseID, search_term = NULL, user_ids = NULL,
 \item{role_id}{Integer of role to limit results (SIS ID not supported)}
 
 \item{state}{Filter results to include only users with one of specified string ("active","invited","rejected","completed","inactive")}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

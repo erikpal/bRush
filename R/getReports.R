@@ -1,19 +1,17 @@
 #' Get list of available reports
 #' 
-#' Get a list of available reports
-#' @param url The base url of a Canvas installation
+#' Get a list of available reports, with extra options to select just a report download url.
 #' @param accountID The account ID to retrieve reports from 
 #' @param titlenm The title of a specific report.  Leave blank for all reports.  Returns all if named report not avilable.
 #' @param link Return vector of download location only.
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getReports <- function(url, accountID, titlenm = "", link = FALSE, ...) {
+
+getReports <- function(accountID, titlenm = "", link = FALSE, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/accounts/accountID/reports"
         url$path <- sub("accountID", accountID, url$path)
 
@@ -26,7 +24,6 @@ getReports <- function(url, accountID, titlenm = "", link = FALSE, ...) {
                 results <- filter(results, title == titlenm)
         }
                 
-        
         if (link == TRUE) {
                 results <- results[["last_run.attachment.url"]]
                 results <- results[!is.na(results)]

@@ -4,21 +4,20 @@
 \alias{getMyCourses}
 \title{Get self courses}
 \usage{
-getMyCourses(url, type = NULL, role_id = NULL, state = NULL, ...)
+getMyCourses(type = NULL, role_id = NULL, state = NULL, server = "test",
+  ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{type}{Filter results to include course with at least one of specified string ("teacher","student","ta","observer","designer")}
 
 \item{role_id}{Integer of role ID to limit results.}
 
 \item{state}{String of enrollment state to limit results to (“unpublished”,“available”,“completed”,“deleted”)}
 
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get course details for the account requesting. All include parameters (see API
-documentation) for this request have all been enabled and can be subsetted out 
-if not needed.
+Get course details for the account requesting.
 }

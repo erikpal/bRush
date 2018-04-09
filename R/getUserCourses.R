@@ -3,18 +3,15 @@
 #' Get course details for the account requesting. All include parameters (see API
 #' documentation) for this request have all been enabled and can be subsetted out 
 #' if not needed.
-#' @param url The base url of a Canvas installation
 #' @param userID The string of a user to request courses of
 #' @param state String of enrollment state to limit results to (“unpublished”,“available”,“completed”,“deleted”)
+#' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getUserCourses <- function(url, userID, state = NULL, ...) {
+getUserCourses <- function(userID, state = NULL, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        
-        url <- parse_url(url)
+        url <- loadURL(server)
+
         url$path <- "api/v1/users/userID/courses"
         url$path <- sub("userID", userID, url$path)
         

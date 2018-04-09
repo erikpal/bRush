@@ -4,12 +4,10 @@
 \alias{getPages}
 \title{Get pages of a course}
 \usage{
-getPages(url, ID, sort = NULL, order = NULL, search_term = NULL,
-  published = NULL, ...)
+getPages(ID, sort = NULL, order = NULL, search_term = NULL,
+  published = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Course or group ID to retreiv pages of}
 
 \item{sort}{Character of how to sort list ("title","created_at","updated_at")}
@@ -19,6 +17,8 @@ getPages(url, ID, sort = NULL, order = NULL, search_term = NULL,
 \item{search_term}{Filter results by partial title. Must be at least 3 characters.}
 
 \item{published}{Boolean to include only published pages}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

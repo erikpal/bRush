@@ -1,7 +1,6 @@
 #' Create a new discussion
 #' 
 #' Create a new discusson for the provided course or group.
-#' @param url The base url of a Canvas installation.
 #' @param ID Course or group ID to create the discussion in.
 #' @param title Character of the title of the assignment
 #' @param message Character of the discussion message.
@@ -28,10 +27,11 @@
 #' @param due_at POSIXct object of date and time of due date if an assignment
 #' @param lock_at POSIXct object of date and time of lock date if an assignment
 #' @param unlock_at POSIXct object of date and time of unlock date if an assignment
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest if an assignment
 #' @export
 
-createDiscussionTopic <- function(url, ID, title, message = "",
+createDiscussionTopic <- function(ID, title, message = "",
                                   discussion_type = "side_comment",
                                   published = FALSE,
                                   podcast_enabled = FALSE,
@@ -52,12 +52,11 @@ createDiscussionTopic <- function(url, ID, title, message = "",
                                   grading_type = "points",
                                   grading_standard_id = NULL,
                                   due_at = "",
-                                  unlock_at = "", ...){
+                                  unlock_at = "", 
+                                  server = "test", ...){
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "api/v1/courses/ID/discussion_topics"
         url$path <- sub("ID", ID, url$path)
         

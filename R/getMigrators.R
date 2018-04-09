@@ -1,23 +1,15 @@
-#' List migrators
+#' List migrations
 #' 
-#' Get terms in a specified account.
-#' @param url The base url of a Canvas installation
+#' List content migrations.
 #' @param ID Integer of the account ID to find sub-accounts for
 #' @param type String of type - course, account, group, or user
+#' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
 
-##I can't test this one since I don't have manage privileges for the root account.
-##Applied to a subaccount, it redirects to the root and returns an error.
-##The error is not JSON data so it doesn't work, further testing with access needed
-
-getMigrators <- function(url, ID, type = "course", ...) {
+getMigrators <- function(ID, type = "course", server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
         
         url$path <-  "api/v1/TYPE/ID/content_migrations/migrators"
         

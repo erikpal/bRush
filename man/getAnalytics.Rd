@@ -4,14 +4,10 @@
 \alias{getAnalytics}
 \title{Get account or course analytics}
 \usage{
-getAnalytics(url, ID, type = "activity", term = "current", course = FALSE,
-  studentID = NULL, ...)
+getAnalytics(ID, type = "activity", term = "current", course = FALSE,
+  studentID = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
-\item{ID}{The account or course ID to retrieve analytics for}
-
 \item{type}{The analytics type (e.g., activity, grades, statistics, assignments, communication, student_summaries)}
 
 \item{term}{The term ID, "complete", or "current"(for account analytics only)}
@@ -19,6 +15,8 @@ getAnalytics(url, ID, type = "activity", term = "current", course = FALSE,
 \item{course}{Boolean to specify it the request is for a course.}
 
 \item{studentID}{ID of a student for student specific requests (activity, assignment, communication)}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

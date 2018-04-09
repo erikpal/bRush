@@ -3,16 +3,13 @@
 #' Get details of accounts that you have access to. Parameters 
 #' (lti_guid|registration_settings) for this request have all been enabled and 
 #' can be subsetted out if not needed.
-#' @param url The base url of a Canvas installation
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getAccounts <- function(url, ...) {
+getAccounts <- function(server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/accounts"
         
         url$query <- list("include[]" = "lti_guid", "include[]" = "registration_settings")

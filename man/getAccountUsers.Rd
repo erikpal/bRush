@@ -4,14 +4,14 @@
 \alias{getAccountUsers}
 \title{Get Users from an Account}
 \usage{
-getAccountUsers(url, accountID, search_term = NULL, ...)
+getAccountUsers(accountID, search_term = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{accountID}{Integer of the account ID to find users for}
 
 \item{search_term}{Filter results by partial name or full ID to match and return in the results list. Must be at least 3 characters.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

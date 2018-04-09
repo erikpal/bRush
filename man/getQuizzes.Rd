@@ -4,14 +4,14 @@
 \alias{getQuizzes}
 \title{Get quizzes from a course}
 \usage{
-getQuizzes(url, courseID, search_term = NULL, ...)
+getQuizzes(courseID, search_term = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find quizzes for}
 
 \item{search_term}{Filter results by partial course name, code, or full ID to match and return in the results list. Must be at least 3 characters.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 }
 \description{
 Get quizzes for the provided course.

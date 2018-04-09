@@ -1,24 +1,28 @@
 #' Get account or course analytics
 #' 
-#' @param url The base url of a Canvas installation
-#' @param ID The account or course ID to retrieve analytics for
 #' @param type The analytics type (e.g., activity, grades, statistics, assignments, communication, student_summaries)
 #' @param term The term ID, "complete", or "current"(for account analytics only)
 #' @param course Boolean to specify it the request is for a course.
 #' @param studentID ID of a student for student specific requests (activity, assignment, communication)
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getAnalytics <- function(url, ID, type = "activity", term = "current", 
-                         course = FALSE, studentID = NULL, ...) {
-        require(httr)
+
+##TODO: Needs to be updated to match changes to the API, which are more organized.
+##https://canvas.instructure.com/doc/api/analytics.html
+
+getAnalytics <- function(ID, type = "activity", term = "current", 
+                         course = FALSE, studentID = NULL, 
+                         server = "test", ...) {
+
+        url <- loadURL(server)
         
         term <- paste0("terms/", term)
-        url <- parse_url(url)
         
         if (course == TRUE) {
                 if (!is.null(studentID)) {
                         if (!type %in% c("activity", "assignments", "communication")) {
-                                stop("Student analytics available for 'activity', 'assignments', or 'commuication'")
+                                stop("Student analytics available for 'activity', 'assignments', or 'communication'")
                         } else {
                                 url$path <- "api/v1/courses/courseID/analytics/users/studentID/typeNM"
                                 url$path <- sub("courseID", ID, url$path)
@@ -58,9 +62,6 @@ getAnalytics <- function(url, ID, type = "activity", term = "current",
 
         url$query <- list(exclude = NULL)
         
-        ##Pass the url to the request processor
-        ##Adding page limitors b/c this seems to not require multiple pages to pull and creates 
-        ##errors. This isn't tested on all formats, but appears to work well for course-level reports.
         results <- processRequest(url, ...)
 
         return(results)

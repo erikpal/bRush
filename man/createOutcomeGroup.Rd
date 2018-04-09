@@ -4,21 +4,23 @@
 \alias{createOutcomeGroup}
 \title{Create a new outcome group}
 \usage{
-createOutcomeGroup(url, ID, groupID, title, description = "",
-  vendor_guid = NULL, ...)
+createOutcomeGroup(ID, groupID, type = "account", title, description = "",
+  vendor_guid = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{ID}{Account ID of the outcome group to create the outcome in}
 
 \item{groupID}{Outcome group id to create the outcome group in}
+
+\item{type}{Character of "course" or "account"}
 
 \item{title}{Character of the title of the outcome group}
 
 \item{description}{Character of the description of the outcome group}
 
 \item{vendor_guid}{A custom GUID for the learning standard group}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

@@ -1,9 +1,9 @@
 #' Create a new outcome in an outcome group
 #' 
 #' Create a new outcome in an outcome group.
-#' @param url The base url of a Canvas installation.
 #' @param ID Account ID of the outcome group to create the outcome in
 #' @param groupID Outcome group id to create the outcome in
+#' @param type Character of "course" or "account"
 #' @param title Character of the title of the outcome
 #' @param display_name Character of a friendly name for titles that are vague/numbered.
 #' @param description Character of the description of the outcome
@@ -12,25 +12,30 @@
 #' @param calculation_method Character of the method of calculation: decaying_average, n_mastery, latest, highest
 #' @param calculation_int Integer if method is decaying_average(percent higher rate recent count as) or n_mastery (n times mastery must be acheived)
 #' @param vendor_guid A custom GUID for the learning standard.
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-createOutcome <- function(url, ID, groupID, title, 
+createOutcome <- function(ID, groupID, type = "account", title, 
                              display_name = "",
                              description = "",
                              mastery_points = NULL,
                              ratings = NULL,
                              calculation_method = "highest",
                              calculation_int = NULL,
-                             vendor_guid = NULL, ...){
+                             vendor_guid = NULL, 
+                             server = "test", ...){
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
-        url$path <- "/api/v1/accounts/ID/outcome_groups/groupID/outcomes"        
-        url$path <- sub("ID", ID, url$path)        
+        url$path <- "/api/v1/TYPE/ID/outcome_groups/groupID/outcomes"        
         url$path <- sub("groupID", groupID, url$path)
+        url$path <- sub("ID", ID, url$path)
+        
+        if (type == "course"){
+                url$path <- sub("TYPE", "courses", url$path)
+        } else if (type == "account") {
+                url$path <- sub("TYPE", "accounts", url$path)
+        }
         
         ##Build the JSON for the body of the POST
         require(jsonlite)

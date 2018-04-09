@@ -13,7 +13,7 @@ loadToken <- function(env_var_name) {
                         token <- readLines(con, n = 1, warn = FALSE)
                         close(con)
                 } else {
-                        stop(cat("Please place token file in .Renviron or in working directory as 'token.txt'."))
+                        stop("Please place token file in .Renviron or in working directory as 'token.txt'.")
                 }
         } else {
                 token <- Sys.getenv(env_var_name) 

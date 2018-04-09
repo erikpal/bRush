@@ -1,23 +1,15 @@
 #' Get Terms
 #' 
 #' Get terms in the specified account.
-#' @param url The base url of a Canvas installation
 #' @param accountID Integer of the account ID to find sub-accounts for
 #' @param state Optional string "active" or "deleted" to limit request
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-
-##I can't test this one since I don't have manage privileges for the root account.
-##Applied to a subaccount, it redirects to the root and returns an error.
-##The error is not JSON data so it doesn't work, further testing with access needed
-
-getTerms <- function(url, accountID, state = NULL, ...) {
+#' 
+getTerms <- function(accountID, state = NULL, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
         
         url$path <-  "api/v1/accounts/accountID/terms"
         url$path <- sub("accountID", accountID, url$path)

@@ -2,14 +2,12 @@
 % Please edit documentation in R/createFile.R
 \name{createFile}
 \alias{createFile}
-\title{Upload a course file
-Upload}
+\title{Upload a course file}
 \usage{
-createFile(url, courseID, name = "", filelocal = "", path = "", ...)
+createFile(courseID, name = "", filelocal = "", path = "",
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course id to create upload the file to}
 
 \item{name}{The name of the file upon upload.}
@@ -18,9 +16,10 @@ createFile(url, courseID, name = "", filelocal = "", path = "", ...)
 
 \item{path}{Path of the folder in course files.}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Upload a course file
-Upload
+Upload a local file to a course.
 }

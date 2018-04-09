@@ -4,15 +4,15 @@
 \alias{getUser}
 \title{Get details of a specific user}
 \usage{
-getUser(url, userID, ...)
+getUser(userID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{userID}{User ID to get details for}
+
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get user details for the provided user id.
+Get user details for the provided user id. NOTE: Returns a list.
 }

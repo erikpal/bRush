@@ -4,16 +4,17 @@
 \alias{getAssignments}
 \title{Get assignments from a course}
 \usage{
-getAssignments(url, courseID, search_term = NULL, bucket = NULL, ...)
+getAssignments(courseID, search_term = NULL, bucket = NULL,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find assignments for}
 
 \item{search_term}{Filter results by partial course name, code, or full ID to match and return in the results list. Must be at least 3 characters.}
 
 \item{bucket}{Limit results to a named bucket ("past", "overdue", "undated", "ungraded", "upcoming", and "future")}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

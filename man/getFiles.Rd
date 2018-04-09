@@ -4,12 +4,10 @@
 \alias{getFiles}
 \title{Get files}
 \usage{
-getFiles(url, ID, IDtype = "course", fileID = NULL, search = NULL,
-  content = NULL, quota = FALSE, ...)
+getFiles(ID, IDtype = "course", fileID = NULL, search = NULL,
+  content = NULL, quota = FALSE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{The course, group, user, folder or specific file ID to return list for.}
 
 \item{IDtype}{The type of ID ("course", "group", "user", "folder", "file")}
@@ -19,6 +17,8 @@ getFiles(url, ID, IDtype = "course", fileID = NULL, search = NULL,
 \item{content}{Character of file type and or subtype pairs (e.g., 'image/jpeg' or 'image')}
 
 \item{quota}{Boolean of whether this is a request for the file space quota}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 

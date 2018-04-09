@@ -4,16 +4,17 @@
 \alias{getUserPageViews}
 \title{Get details of a specific user}
 \usage{
-getUserPageViews(url, userID, start_time = "", end_time = "", ...)
+getUserPageViews(userID, start_time = "", end_time = "", server = "test",
+  ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{userID}{User ID to find assignments for}
 
 \item{start_time}{POSIXct object of date and time of due date}
 
 \item{end_time}{POSIXct object of date and time of due date}
+
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

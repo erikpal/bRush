@@ -4,16 +4,17 @@
 \alias{createConversation}
 \title{Create a new conversation}
 \usage{
-createConversation(url, userID, subject = NULL, body = NULL, ...)
+createConversation(userID, subject = NULL, body = NULL, server = "test",
+  ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{userID}{User id of person to message}
 
 \item{subject}{Character of conversation subject}
 
 \item{body}{Character of body content}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

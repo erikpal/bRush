@@ -4,7 +4,7 @@
 \alias{createDiscussionTopic}
 \title{Create a new discussion}
 \usage{
-createDiscussionTopic(url, ID, title, message = "",
+createDiscussionTopic(ID, title, message = "",
   discussion_type = "side_comment", published = FALSE,
   podcast_enabled = FALSE, podcast_has_student_posts = FALSE,
   require_initial_post = FALSE, is_announcement = FALSE, pinned = FALSE,
@@ -13,11 +13,9 @@ createDiscussionTopic(url, ID, title, message = "",
   position_after = NULL, group_category_id = NULL, points_possible = NULL,
   peer_reviews = FALSE, automatic_peer_reviews = FALSE,
   grading_type = "points", grading_standard_id = NULL, due_at = "",
-  unlock_at = "", ...)
+  unlock_at = "", server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{ID}{Course or group ID to create the discussion in.}
 
 \item{title}{Character of the title of the assignment}
@@ -65,6 +63,8 @@ createDiscussionTopic(url, ID, title, message = "",
 \item{due_at}{POSIXct object of date and time of due date if an assignment}
 
 \item{unlock_at}{POSIXct object of date and time of unlock date if an assignment}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest if an assignment}
 

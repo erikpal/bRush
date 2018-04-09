@@ -1,18 +1,16 @@
 #' Show the specified outcome group
 #' 
-#' Get a list of outcomes groups in a course or account.
-#' @param url The base url of a Canvas installation
+#' Get details of a specified outcomes group. Note: Returns a list.
 #' @param ID Course or account ID to retreive outcomes group from
 #' @param groupID Outcome group id to create the outcome in
 #' @param type Character of "course" or "account"
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getOutcomeGroup <- function(url, ID, groupID, type = "account", ...) {
+getOutcomeGroup <- function(ID, groupID, type = "account", server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "/api/v1/TYPE/ID/outcome_groups/groupID"
         url$path <- sub("ID", ID, url$path)
         url$path <- sub("groupID", groupID, url$path)

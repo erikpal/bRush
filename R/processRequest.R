@@ -23,7 +23,7 @@ processRequest <- function(url, body, method = "GET",
         header <- paste("Bearer", token)
         
         if(verbose == TRUE) {
-        print(build_url(url))
+                print(build_url(url))
         }
 
         if (method == "GET") {

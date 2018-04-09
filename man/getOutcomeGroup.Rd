@@ -4,19 +4,19 @@
 \alias{getOutcomeGroup}
 \title{Show the specified outcome group}
 \usage{
-getOutcomeGroup(url, ID, groupID, type = "account", ...)
+getOutcomeGroup(ID, groupID, type = "account", server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Course or account ID to retreive outcomes group from}
 
 \item{groupID}{Outcome group id to create the outcome in}
 
 \item{type}{Character of "course" or "account"}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get a list of outcomes groups in a course or account.
+Get details of a specified outcomes group. Note: Returns a list.
 }

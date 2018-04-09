@@ -4,14 +4,14 @@
 \alias{getSubaccounts}
 \title{Get Sub-accounts}
 \usage{
-getSubaccounts(url, accountID, recursive = FALSE, ...)
+getSubaccounts(accountID, recursive = FALSE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{accountID}{Integer of the account ID to find sub-accounts for}
 
 \item{recursive}{Boolean to search returned subaccounts for subaccounts}
+
+\item{server}{The base url of a Canvas installation}
 
 \item{...}{Optional page options to pass to processRequest}
 }

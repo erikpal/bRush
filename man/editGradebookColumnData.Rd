@@ -4,16 +4,17 @@
 \alias{editGradebookColumnData}
 \title{Create/edit a custom grade book column data entry for user in a course}
 \usage{
-editGradebookColumnData(url, courseID, columnID, userID, content, ...)
+editGradebookColumnData(courseID, columnID, userID, content, server = "test",
+  ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID with the custom column}
 
 \item{columnID}{ID of of the column}
 
 \item{userID}{ID of the user (student) to write column datum to}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 

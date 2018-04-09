@@ -4,19 +4,20 @@
 \alias{getGradebookColumnData}
 \title{Get custom grade book column data for a course}
 \usage{
-getGradebookColumnData(url, courseID, columnID, include_hidden = TRUE, ...)
+getGradebookColumnData(courseID, columnID, include_hidden = TRUE,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID with the custom column}
 
 \item{columnID}{ID of of the column}
 
 \item{include_hidden}{Boolean to include hidden columns in request}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get custom grade book column entry for the provided user and course.
+Get custom grade book column entry for the course.
 }

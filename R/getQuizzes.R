@@ -1,16 +1,15 @@
 #' Get quizzes from a course
 #' 
 #' Get quizzes for the provided course.
-#' @param url The base url of a Canvas installation
 #' @param courseID Course ID to find quizzes for
 #' @param search_term Filter results by partial course name, code, or full ID to match and return in the results list. Must be at least 3 characters.
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @export
-getQuizzes <- function(url, courseID, search_term = NULL, ...) {
+
+getQuizzes <- function(courseID, search_term = NULL, server = "test", ...) {
+
+        url <- loadURL(server)
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/quizzes"
         url$path <- sub("courseID", courseID, url$path)
         

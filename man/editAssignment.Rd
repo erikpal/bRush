@@ -4,7 +4,7 @@
 \alias{editAssignment}
 \title{Edit an assignment}
 \usage{
-editAssignment(url, courseID, assignID, name = NULL, description = NULL,
+editAssignment(courseID, assignID, name = NULL, description = NULL,
   points_possible = NULL, type = NULL, online_type = NULL,
   allowed_extensions = NULL, grading_type = NULL,
   assignment_group_id = NULL, grading_standard_id = NULL,
@@ -13,11 +13,9 @@ editAssignment(url, courseID, assignID, name = NULL, description = NULL,
   peer_reviews = NULL, automatic_peer_reviews = NULL,
   notify_of_update = NULL, muted = NULL,
   grade_group_students_individual = NULL, ext_tool_url = NULL,
-  ext_tool_new_tab = NULL, ...)
+  ext_tool_new_tab = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{courseID}{Course ID to create the assignment in.}
 
 \item{assignID}{Assignment ID of the assignment to edit.}
@@ -63,6 +61,8 @@ editAssignment(url, courseID, assignID, name = NULL, description = NULL,
 \item{ext_tool_url}{Character of external tool url if type is "external_tool".}
 
 \item{ext_tool_new_tab}{Boolean of whether ext tool opens in new tab.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 

@@ -4,12 +4,11 @@
 \alias{getCourses}
 \title{Get courses from an account}
 \usage{
-getCourses(url, accountID, termID = NULL, search_term = NULL,
-  by_teachers = NULL, by_subaccounts = NULL, type = NULL, ...)
+getCourses(accountID, termID = NULL, search_term = NULL,
+  by_teachers = NULL, by_subaccounts = NULL, type = NULL,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{accountID}{Integer of the account ID to find sub-accounts for}
 
 \item{termID}{Integer of enrollment term ID}
@@ -21,6 +20,8 @@ getCourses(url, accountID, termID = NULL, search_term = NULL,
 \item{by_subaccounts}{Vector of subaccount integers.}
 
 \item{type}{Filter results to include course with at least one of specified string ("teacher","student","ta","observer","designer")}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

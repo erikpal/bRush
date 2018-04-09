@@ -4,14 +4,14 @@
 \alias{getDomains}
 \title{Get Canvas Domains}
 \usage{
-getDomains(url, name = NULL, domain = NULL, ...)
+getDomains(name = NULL, domain = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{name}{Optional string to retreive only matching results (e.g. "university")}
 
 \item{domain}{Optional string to retreive only matching results (e.g. "edu")}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

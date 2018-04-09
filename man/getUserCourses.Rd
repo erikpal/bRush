@@ -4,14 +4,14 @@
 \alias{getUserCourses}
 \title{Get courses for a user}
 \usage{
-getUserCourses(url, userID, state = NULL, ...)
+getUserCourses(userID, state = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{userID}{The string of a user to request courses of}
 
 \item{state}{String of enrollment state to limit results to (“unpublished”,“available”,“completed”,“deleted”)}
+
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

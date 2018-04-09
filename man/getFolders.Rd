@@ -4,11 +4,10 @@
 \alias{getFolders}
 \title{Get folders}
 \usage{
-getFolders(url, ID, IDtype = "course", folderID = NULL, path = NULL, ...)
+getFolders(ID, IDtype = "course", folderID = NULL, path = NULL,
+  server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{The course, group, user or folder ID to return a list of folders of.}
 
 \item{IDtype}{The type of ID ("course", "group", "user", or "folder")}
@@ -17,8 +16,10 @@ getFolders(url, ID, IDtype = "course", folderID = NULL, path = NULL, ...)
 
 \item{path}{Character of path to folder}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get a list of available reports
+Get a list of folders for the provided, course, group, or user.
 }

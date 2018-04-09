@@ -4,14 +4,14 @@
 \alias{getOutcomeGroups}
 \title{Get outcome groups for a context}
 \usage{
-getOutcomeGroups(url, ID, type = "account", ...)
+getOutcomeGroups(ID, type = "account", server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Course or account ID to retreive outcomes groups from}
 
 \item{type}{Character of "course" or "account"}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

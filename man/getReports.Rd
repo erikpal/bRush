@@ -4,19 +4,19 @@
 \alias{getReports}
 \title{Get list of available reports}
 \usage{
-getReports(url, accountID, titlenm = "", link = FALSE, ...)
+getReports(accountID, titlenm = "", link = FALSE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{accountID}{The account ID to retrieve reports from}
 
 \item{titlenm}{The title of a specific report.  Leave blank for all reports.  Returns all if named report not avilable.}
 
 \item{link}{Return vector of download location only.}
 
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
+
 \item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Get a list of available reports
+Get a list of available reports, with extra options to select just a report download url.
 }

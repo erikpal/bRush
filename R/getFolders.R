@@ -1,20 +1,18 @@
 #' Get folders
 #' 
-#' Get a list of available reports
-#' @param url The base url of a Canvas installation
+#' Get a list of folders for the provided, course, group, or user.
 #' @param ID The course, group, user or folder ID to return a list of folders of.
 #' @param IDtype The type of ID ("course", "group", "user", or "folder")
 #' @param folderID The ID of a folder if also providing a course or group ID.
 #' @param path Character of path to folder
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
-#' @export
-getFolders <- function(url, ID, IDtype = "course", 
-                       folderID = NULL, path = NULL, ...) {
+
+getFolders <- function(ID, IDtype = "course", 
+                       folderID = NULL, path = NULL, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "api/v1/TYPE/ID/folders"
         
         if (IDtype == "course") {

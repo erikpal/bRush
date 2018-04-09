@@ -4,12 +4,10 @@
 \alias{createSection}
 \title{Create a new section}
 \usage{
-createSection(url, courseID, name, sis_section_id = "", start_at = "",
-  end_at = "", restrict = TRUE, ...)
+createSection(courseID, name, sis_section_id = "", start_at = "",
+  end_at = "", restrict = TRUE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{courseID}{Course ID to create the section in.}
 
 \item{name}{Character of the name of the section}
@@ -21,6 +19,8 @@ createSection(url, courseID, name, sis_section_id = "", start_at = "",
 \item{end_at}{Section end date in ISO8601 format, e.g. 2011-01-01T01:00Z}
 
 \item{restrict}{Boolean, set to true to restrict user enrollments to the start and end dates of the section.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

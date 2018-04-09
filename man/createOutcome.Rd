@@ -4,16 +4,17 @@
 \alias{createOutcome}
 \title{Create a new outcome in an outcome group}
 \usage{
-createOutcome(url, ID, groupID, title, display_name = "", description = "",
-  mastery_points = NULL, ratings = NULL, calculation_method = "highest",
-  calculation_int = NULL, vendor_guid = NULL, ...)
+createOutcome(ID, groupID, type = "account", title, display_name = "",
+  description = "", mastery_points = NULL, ratings = NULL,
+  calculation_method = "highest", calculation_int = NULL,
+  vendor_guid = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{ID}{Account ID of the outcome group to create the outcome in}
 
 \item{groupID}{Outcome group id to create the outcome in}
+
+\item{type}{Character of "course" or "account"}
 
 \item{title}{Character of the title of the outcome}
 
@@ -30,6 +31,8 @@ createOutcome(url, ID, groupID, title, display_name = "", description = "",
 \item{calculation_int}{Integer if method is decaying_average(percent higher rate recent count as) or n_mastery (n times mastery must be acheived)}
 
 \item{vendor_guid}{A custom GUID for the learning standard.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

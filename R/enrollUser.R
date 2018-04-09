@@ -1,7 +1,6 @@
 #' Enroll a user in a section or course
 #' 
 #' Create a new section for the provided course.
-#' @param url The base url of a Canvas installation.
 #' @param ID Course ID for enrollment
 #' @param user_id ID of the user to be enrolled
 #' @param course_section_id ID of the course section to enroll student in
@@ -9,19 +8,19 @@
 #' @param enrollment_state Character of active, invited, inactive
 #' @param limit_privileges Boolean, if true, the enrollment will only allow the user to see and interact with users enrolled in the section given by course_section_id
 #' @param notify Boolean, if true, a notification will be sent to the enrolled user. 
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-enrollUser <- function(url, ID, user_id, 
+enrollUser <- function(ID, user_id, 
                        course_section_id = "",
                        type = "StudentEnrollment",
                        enrollment_state = "active",
                        limit_privileges = TRUE,
-                       notify = ""){
+                       notify = "", 
+                       server = "test", ...){
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
-        url <- parse_url(url)
+        url <- loadURL(server)
+        
         url$path <- "api/v1/courses/ID/enrollments"
         url$path <- sub("ID", ID, url$path)
         

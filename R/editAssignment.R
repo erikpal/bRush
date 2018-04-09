@@ -1,7 +1,6 @@
 #' Edit an assignment
 #' 
 #' Edit an assignment of the provided ID for the provided course.
-#' @param url The base url of a Canvas installation.
 #' @param courseID Course ID to create the assignment in.
 #' @param assignID Assignment ID of the assignment to edit.
 #' @param name Character of the name of the assignment
@@ -28,9 +27,10 @@
 #' @param grading_standard_id Integer id of the grading standard used.
 #' @param ext_tool_url Character of external tool url if type is "external_tool".
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-editAssignment <- function(url, courseID, assignID, name = NULL, description = NULL,
+editAssignment <- function(courseID, assignID, name = NULL, description = NULL,
                            points_possible = NULL,
                            type = NULL,
                            online_type = NULL,
@@ -50,13 +50,11 @@ editAssignment <- function(url, courseID, assignID, name = NULL, description = N
                            muted = NULL,
                            grade_group_students_individual = NULL,
                            ext_tool_url = NULL,
-                           ext_tool_new_tab = NULL, ...){
+                           ext_tool_new_tab = NULL, 
+                           server = "test", ...){
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/courses/courseID/assignments/assignID"
         url$path <- sub("courseID", courseID, url$path)
         url$path <- sub("assignID", assignID, url$path)

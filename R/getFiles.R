@@ -1,23 +1,21 @@
 #' Get files
 #' 
 #' Get a list of available reports
-#' @param url The base url of a Canvas installation
 #' @param ID The course, group, user, folder or specific file ID to return list for.
 #' @param IDtype The type of ID ("course", "group", "user", "folder", "file")
 #' @param fileID The ID of a file if getting a specific file.
 #' @param term Character of search term to limit results
 #' @param content Character of file type and or subtype pairs (e.g., 'image/jpeg' or 'image')
 #' @param quota Boolean of whether this is a request for the file space quota
+#' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
-getFiles <- function(url, ID, IDtype = "course", fileID = NULL,
-                     search = NULL, content = NULL, quota = FALSE, ...) {
+
+getFiles <- function(ID, IDtype = "course", fileID = NULL,
+                     search = NULL, content = NULL, quota = FALSE, server = "test", ...) {
         
-        ##Build the base url for the request
-        ##Add in the api specific parameters
-        require(httr)
+        url <- loadURL(server)
         
-        url <- parse_url(url)
         url$path <- "api/v1/TYPE/ID/files"
 
         if (IDtype == "course") {
@@ -58,11 +56,13 @@ getFiles <- function(url, ID, IDtype = "course", fileID = NULL,
                 url$query <- list(exclude = NULL)
         } else if (IDtype == "file") {
                 url$query <- list("include[]" = "user")
+        } else if (IDtype == "user") {
+                url$query <- list(search_term = search,
+                                  content_type = content)
         } else {
                 url$query <- list("include[]" = "user",
                                 search_term = search,
                                 content_type = content)
-                
         }
         
         if (!is.null(search)) {

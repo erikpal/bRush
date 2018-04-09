@@ -4,12 +4,10 @@
 \alias{createPage}
 \title{Create a new wiki page}
 \usage{
-createPage(url, ID, title = NULL, body = NULL, edit = "teachers",
-  notify = FALSE, publish = TRUE, front = FALSE, ...)
+createPage(ID, title = NULL, body = NULL, edit = "teachers",
+  notify = FALSE, publish = TRUE, front = FALSE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Course or group id to create the page in}
 
 \item{title}{String of page title.}
@@ -23,6 +21,8 @@ createPage(url, ID, title = NULL, body = NULL, edit = "teachers",
 \item{publish}{Boolean to publish the page after creating.}
 
 \item{front}{Boolean to set page as the front page}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

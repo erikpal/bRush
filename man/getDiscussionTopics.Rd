@@ -4,12 +4,10 @@
 \alias{getDiscussionTopics}
 \title{Get discussions topics from a course}
 \usage{
-getDiscussionTopics(url, courseID, search_term = NULL, scope = NULL,
-  order_by = "position", only_announcements = NULL, ...)
+getDiscussionTopics(courseID, search_term = NULL, scope = NULL,
+  order_by = "position", only_announcements = NULL, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find assignments for}
 
 \item{search_term}{Filter results by term. Must be at least 3 characters.}
@@ -17,6 +15,8 @@ getDiscussionTopics(url, courseID, search_term = NULL, scope = NULL,
 \item{scope}{Limit results to a topic state ("locked", "unlocked", "pinned", "unpinned")}
 
 \item{only_announcements}{Set to "true" for only announcements}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

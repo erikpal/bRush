@@ -4,20 +4,18 @@
 \alias{createAssignment}
 \title{Create a new assignment}
 \usage{
-createAssignment(url, courseID, name, description = "",
-  points_possible = "", type = "online", online_type = c("online_upload",
-  "online_text_entry"), allowed_extensions = c("doc", "docx", "pdf", "ppt",
-  "pptx", "rtf"), grading_type = "points", assignment_group_id = "",
+createAssignment(courseID, name, description = "", points_possible = "",
+  type = "online", online_type = c("online_upload", "online_text_entry"),
+  allowed_extensions = c("doc", "docx", "pdf", "ppt", "pptx", "rtf"),
+  grading_type = "points", assignment_group_id = "",
   grading_standard_id = "", group_category_id = "", due_at = "",
   lock_at = "", unlock_at = "", published = FALSE,
   turnitin_enabled = FALSE, peer_reviews = FALSE,
   automatic_peer_reviews = FALSE, notify_of_update = FALSE, muted = FALSE,
   grade_group_students_individual = FALSE, ext_tool_url = NULL,
-  ext_tool_new_tab = FALSE, ...)
+  ext_tool_new_tab = FALSE, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation.}
-
 \item{courseID}{Course ID to create the assignment in.}
 
 \item{name}{Character of the name of the assignment}
@@ -61,6 +59,8 @@ createAssignment(url, courseID, name, description = "",
 \item{ext_tool_url}{Character of external tool url if type is "external_tool".}
 
 \item{ext_tool_new_tab}{Boolean of whether ext tool opens in new tab.}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 

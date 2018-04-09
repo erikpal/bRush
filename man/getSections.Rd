@@ -4,12 +4,12 @@
 \alias{getSections}
 \title{Get sections from a course}
 \usage{
-getSections(url, courseID, ...)
+getSections(courseID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{courseID}{Course ID to find assignments for}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

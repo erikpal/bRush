@@ -4,12 +4,10 @@
 \alias{createMigration}
 \title{Create a content migration.}
 \usage{
-createMigration(url, ID, type = "course",
-  migration_type = "course_copy_importer", settings, ...)
+createMigration(ID, type = "course",
+  migration_type = "course_copy_importer", settings, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{ID of context to import into.}
 
 \item{type}{String of type - course, account, group, or user}
@@ -17,6 +15,8 @@ createMigration(url, ID, type = "course",
 \item{migration_type}{String of migrator type}
 
 \item{settings}{Named list of settings for the migrator}
+
+\item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }

@@ -4,12 +4,12 @@
 \alias{getOutcome}
 \title{Show the details of an outcome}
 \usage{
-getOutcome(url, ID, ...)
+getOutcome(ID, server = "test", ...)
 }
 \arguments{
-\item{url}{The base url of a Canvas installation}
-
 \item{ID}{Outcome ID}
+
+\item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
 }
