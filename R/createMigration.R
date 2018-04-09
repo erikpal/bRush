@@ -17,6 +17,7 @@ createMigration <- function(url, ID, type = "course",
         ##Add in the api specific parameters
         require(httr)
         url <- parse_url(url)
+        
         url$path <- "api/v1/TYPE/ID/content_migrations"
         
         if(type == "course"){

@@ -27,7 +27,7 @@ createOutcome(url, ID, groupID, title, display_name = "", description = "",
 
 \item{calculation_method}{Character of the method of calculation: decaying_average, n_mastery, latest, highest}
 
-\item{calculation_int}{Integer if method is decaying_average(% higher rate recent count as) or n_mastery (n times mastery must be acheived)}
+\item{calculation_int}{Integer if method is decaying_average(percent higher rate recent count as) or n_mastery (n times mastery must be acheived)}
 
 \item{vendor_guid}{A custom GUID for the learning standard.}
 

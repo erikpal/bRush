@@ -4,8 +4,8 @@
 \alias{createMigration}
 \title{Create a content migration.}
 \usage{
-createMigration(url, ID, source_course_id, type = "course",
-  migration_type = "course_copy_importer", ...)
+createMigration(url, ID, type = "course",
+  migration_type = "course_copy_importer", settings, ...)
 }
 \arguments{
 \item{url}{The base url of a Canvas installation}
@@ -16,10 +16,11 @@ createMigration(url, ID, source_course_id, type = "course",
 
 \item{migration_type}{String of migrator type}
 
-\item{...}{Optional page options to pass to processRequest}
+\item{settings}{Named list of settings for the migrator}
 
-\item{settings}{List of settings for the migrator}
+\item{...}{Optional page options to pass to processRequest}
 }
 \description{
-Create a content migration with migrator type and a settings list.
+Create a content migration with migrator type and a settings list. Does not
+currently support file uploads.  Limited testing conducted on various migrators.
 }

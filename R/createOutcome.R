@@ -10,7 +10,7 @@
 #' @param mastery_points Integer of the mastery threshold in the rubric criterion
 #' @param ratings A list of named vectors with "description" & "points" defined for each criterion
 #' @param calculation_method Character of the method of calculation: decaying_average, n_mastery, latest, highest
-#' @param calculation_int Integer if method is decaying_average(% higher rate recent count as) or n_mastery (n times mastery must be acheived)
+#' @param calculation_int Integer if method is decaying_average(percent higher rate recent count as) or n_mastery (n times mastery must be acheived)
 #' @param vendor_guid A custom GUID for the learning standard.
 #' @param ... Optional page options to pass to processRequest
 #' @export
