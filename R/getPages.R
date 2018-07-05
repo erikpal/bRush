@@ -1,7 +1,7 @@
 #' Get pages of a course
 #' 
 #' Get a list of pages in course or group.
-#' @param ID Course or group ID to retreiv pages of
+#' @param ID Course or group ID to retreive pages from
 #' @param sort Character of how to sort list ("title","created_at","updated_at")
 #' @param order Character of order to sort ("asc","desc")
 #' @param search_term Filter results by partial title. Must be at least 3 characters.
@@ -15,6 +15,8 @@ getPages <- function(ID, sort = NULL, order = NULL,
                      server = "test", ...) {
         
         url <- loadURL(server)
+        
+        
 
         url$path <- "api/v1/courses/ID/pages"
         url$path <- sub("ID", ID, url$path)
@@ -24,8 +26,6 @@ getPages <- function(ID, sort = NULL, order = NULL,
                           search_term = search_term,
                           published = published)
                           
-        print(build_url(url))
-        
         ##Pass the url to the request processor
         results <- processRequest(url, ...)
         

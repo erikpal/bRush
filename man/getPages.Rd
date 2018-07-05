@@ -8,7 +8,7 @@ getPages(ID, sort = NULL, order = NULL, search_term = NULL,
   published = NULL, server = "test", ...)
 }
 \arguments{
-\item{ID}{Course or group ID to retreiv pages of}
+\item{ID}{Course or group ID to retreive pages from}
 
 \item{sort}{Character of how to sort list ("title","created_at","updated_at")}
 
