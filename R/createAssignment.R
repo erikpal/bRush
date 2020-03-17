@@ -43,6 +43,7 @@ createAssignment <- function(courseID, name, description = "",
                              unlock_at = "",
                              published = FALSE,
                              turnitin_enabled = FALSE,
+                             turnitin_settings = NULL,
                              peer_reviews = FALSE,
                              automatic_peer_reviews = FALSE,
                              notify_of_update = FALSE,
@@ -95,6 +96,11 @@ createAssignment <- function(courseID, name, description = "",
                         new_tab = ext_tool_new_tab
                 )
                 body[[1]]$external_tool_tag_attributes <- external_tool_tag_attributes
+        }
+        
+        if (!is.null(turnitin_settings)) {
+                body[[1]]$turnitin_settings <- turnitin_settings
+                
         }
         
         ##Convert ot JSON

@@ -10,8 +10,9 @@ createAssignment(courseID, name, description = "", points_possible = "",
   grading_type = "points", assignment_group_id = "",
   grading_standard_id = "", group_category_id = "", due_at = "",
   lock_at = "", unlock_at = "", published = FALSE,
-  turnitin_enabled = FALSE, peer_reviews = FALSE,
-  automatic_peer_reviews = FALSE, notify_of_update = FALSE, muted = FALSE,
+  turnitin_enabled = FALSE, turnitin_settings = NULL,
+  peer_reviews = FALSE, automatic_peer_reviews = FALSE,
+  notify_of_update = FALSE, muted = FALSE,
   grade_group_students_individual = FALSE, ext_tool_url = NULL,
   ext_tool_new_tab = FALSE, server = "test", ...)
 }
@@ -48,6 +49,8 @@ createAssignment(courseID, name, description = "", points_possible = "",
 
 \item{turnitin_enabled}{Boolean to specify whether to use the Turnitin API.}
 
+\item{turnitin_settings}{Named list of turnitin settings.}
+
 \item{peer_reviews}{Boolean to enable peer reviews}
 
 \item{automatic_peer_reviews}{Boolean to enable automatically assign peer reviewers}
@@ -63,8 +66,6 @@ createAssignment(courseID, name, description = "", points_possible = "",
 \item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
-
-\item{turnitin_settings}{Named list of turnitin settings.}
 
 \item{external_tool_tag_attributes}{Named list od external tool attributes.}
 
