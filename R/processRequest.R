@@ -8,16 +8,23 @@
 #' @param page Page number to start requests from
 #' @param end_page Page number to end requests
 #' @param env_var_name Name of the API key saved in .Renviron
+#' @param as_user_id User id for masquerading
 #' @param verbose Enable verbose mode
 #' @export
 
 ##TODO: per_page set to 1 causes problems
 processRequest <- function(url, body, method = "GET",
                            env_var_name = "CanvasApiKey", 
+                           as_user_id = NULL,
                            verbose = FALSE) {
         require(httr)
         require(jsonlite)
         require(dplyr)
+        
+        ## Masquerade
+        if(!is.null(as_user_id)) {
+                url$query$as_user_id <- as_user_id
+        }
         
         token <- loadToken(env_var_name)##Load  token from text file in the working directory
         header <- paste("Bearer", token)
@@ -27,9 +34,8 @@ processRequest <- function(url, body, method = "GET",
         }
 
         if (method == "GET") {
-
+                
                 results <- list()
-                #url$query <- c(url$query)
                 continue <- TRUE
                 page <- 0
                 

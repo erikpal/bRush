@@ -5,7 +5,7 @@
 \title{Get Multipage Results}
 \usage{
 processRequest(url, body, method = "GET", env_var_name = "CanvasApiKey",
-  verbose = FALSE)
+  as_user_id = NULL, verbose = FALSE)
 }
 \arguments{
 \item{env_var_name}{Name of the API key saved in .Renviron}
