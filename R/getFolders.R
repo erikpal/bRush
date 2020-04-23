@@ -7,6 +7,8 @@
 #' @param path Character of path to folder
 #' @param server Test, beta, production, or other name in R.environ OR full url of server
 #' @param ... Optional page options to pass to processRequest
+#' @export
+
 
 getFolders <- function(ID, IDtype = "course", 
                        folderID = NULL, path = NULL, server = "test", ...) {
