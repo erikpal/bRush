@@ -1,17 +1,17 @@
-#' List migrators
+#' List migrations
 #' 
-#' List content migrators
+#' List content migrations.
 #' @param ID Integer of the account ID to find sub-accounts for
 #' @param type String of type - course, account, group, or user
 #' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
 
-getMigrators <- function(ID, type = "course", server = "test", ...) {
+getMigrations <- function(ID, type = "course", server = "test", ...) {
         
         url <- loadURL(server)
         
-        url$path <-  "api/v1/TYPE/ID/content_migrations/migrators"
+        url$path <-  "api/v1/TYPE/ID/content_migrations"
         
         if(type == "course"){
                 url$path <- sub("TYPE", "courses", url$path)
