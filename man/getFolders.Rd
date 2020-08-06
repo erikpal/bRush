@@ -4,8 +4,14 @@
 \alias{getFolders}
 \title{Get folders}
 \usage{
-getFolders(ID, IDtype = "course", folderID = NULL, path = NULL,
-  server = "test", ...)
+getFolders(
+  ID,
+  IDtype = "course",
+  folderID = NULL,
+  path = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{The course, group, user or folder ID to return a list of folders of.}

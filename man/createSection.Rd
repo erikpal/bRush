@@ -4,8 +4,16 @@
 \alias{createSection}
 \title{Create a new section}
 \usage{
-createSection(courseID, name, sis_section_id = "", start_at = "",
-  end_at = "", restrict = TRUE, server = "test", ...)
+createSection(
+  courseID,
+  name,
+  sis_section_id = "",
+  start_at = "",
+  end_at = "",
+  restrict = TRUE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to create the section in.}

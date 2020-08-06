@@ -4,8 +4,17 @@
 \alias{createPage}
 \title{Create a new wiki page}
 \usage{
-createPage(ID, title = NULL, body = NULL, edit = "teachers",
-  notify = FALSE, publish = TRUE, front = FALSE, server = "test", ...)
+createPage(
+  ID,
+  title = NULL,
+  body = NULL,
+  edit = "teachers",
+  notify = FALSE,
+  publish = TRUE,
+  front = FALSE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Course or group id to create the page in}

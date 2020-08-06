@@ -4,8 +4,15 @@
 \alias{getPages}
 \title{Get pages of a course}
 \usage{
-getPages(ID, sort = NULL, order = NULL, search_term = NULL,
-  published = NULL, server = "test", ...)
+getPages(
+  ID,
+  sort = NULL,
+  order = NULL,
+  search_term = NULL,
+  published = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Course or group ID to retreive pages from}

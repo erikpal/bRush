@@ -4,10 +4,21 @@
 \alias{createOutcome}
 \title{Create a new outcome in an outcome group}
 \usage{
-createOutcome(ID, groupID, type = "account", title, display_name = "",
-  description = "", mastery_points = NULL, ratings = NULL,
-  calculation_method = "highest", calculation_int = NULL,
-  vendor_guid = NULL, server = "test", ...)
+createOutcome(
+  ID,
+  groupID,
+  type = "account",
+  title,
+  display_name = "",
+  description = "",
+  mastery_points = NULL,
+  ratings = NULL,
+  calculation_method = "highest",
+  calculation_int = NULL,
+  vendor_guid = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Account ID of the outcome group to create the outcome in}

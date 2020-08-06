@@ -4,8 +4,16 @@
 \alias{getFiles}
 \title{Get files}
 \usage{
-getFiles(ID, IDtype = "course", fileID = NULL, search = NULL,
-  content = NULL, quota = FALSE, server = "test", ...)
+getFiles(
+  ID,
+  IDtype = "course",
+  fileID = NULL,
+  search = NULL,
+  content = NULL,
+  quota = FALSE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{The course, group, user, folder or specific file ID to return list for.}

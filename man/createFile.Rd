@@ -4,8 +4,14 @@
 \alias{createFile}
 \title{Upload a course file}
 \usage{
-createFile(courseID, name = "", filelocal = "", path = "",
-  server = "test", ...)
+createFile(
+  courseID,
+  name = "",
+  filelocal = "",
+  path = "",
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course id to create upload the file to}

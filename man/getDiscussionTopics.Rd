@@ -4,8 +4,15 @@
 \alias{getDiscussionTopics}
 \title{Get discussions topics from a course}
 \usage{
-getDiscussionTopics(courseID, search_term = NULL, scope = NULL,
-  order_by = "position", only_announcements = NULL, server = "test", ...)
+getDiscussionTopics(
+  courseID,
+  search_term = NULL,
+  scope = NULL,
+  order_by = "position",
+  only_announcements = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to find assignments for}

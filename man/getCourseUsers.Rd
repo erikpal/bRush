@@ -4,9 +4,17 @@
 \alias{getCourseUsers}
 \title{Get users from a course}
 \usage{
-getCourseUsers(courseID, search_term = NULL, user_ids = NULL,
-  test_student = FALSE, type = NULL, role_id = NULL, state = NULL,
-  server = "test", ...)
+getCourseUsers(
+  courseID,
+  search_term = NULL,
+  user_ids = NULL,
+  test_student = FALSE,
+  type = NULL,
+  role_id = NULL,
+  state = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to find users for}

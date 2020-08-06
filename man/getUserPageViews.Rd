@@ -4,8 +4,7 @@
 \alias{getUserPageViews}
 \title{Get details of a specific user}
 \usage{
-getUserPageViews(userID, start_time = "", end_time = "", server = "test",
-  ...)
+getUserPageViews(userID, start_time = "", end_time = "", server = "test", ...)
 }
 \arguments{
 \item{userID}{User ID to find assignments for}

@@ -4,9 +4,17 @@
 \alias{enrollUser}
 \title{Enroll a user in a section or course}
 \usage{
-enrollUser(ID, user_id, course_section_id = "", type = "StudentEnrollment",
-  enrollment_state = "active", limit_privileges = TRUE, notify = "",
-  server = "test", ...)
+enrollUser(
+  ID,
+  user_id,
+  course_section_id = "",
+  type = "StudentEnrollment",
+  enrollment_state = "active",
+  limit_privileges = TRUE,
+  notify = "",
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Course ID for enrollment}

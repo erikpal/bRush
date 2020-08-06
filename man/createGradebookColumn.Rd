@@ -4,8 +4,14 @@
 \alias{createGradebookColumn}
 \title{Create a custom grade book column}
 \usage{
-createGradebookColumn(ID, title = NULL, position = 1, hidden = FALSE,
-  server = "test", ...)
+createGradebookColumn(
+  ID,
+  title = NULL,
+  position = 1,
+  hidden = FALSE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Course id to create the page in}

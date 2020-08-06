@@ -4,14 +4,35 @@
 \alias{startReport}
 \title{Start an account report}
 \usage{
-startReport(accountID, report_type, server = "test",
-  enrollment_term_id = NULL, include_deleted = NULL, course_id = NULL,
-  order = NULL, users = NULL, accounts = NULL, terms = NULL,
-  courses = NULL, sections = NULL, enrollments = NULL, groups = NULL,
-  group_categories = NULL, group_memberships = NULL, xlist = NULL,
-  user_observers = NULL, admins = NULL, created_by_sis = NULL,
-  start_at = NULL, end_at = NULL, include_enrollment_state = NULL,
-  enrollment_state = NULL, enrollment_type = NULL, minimum = NULL, ...)
+startReport(
+  accountID,
+  report_type,
+  server = "test",
+  enrollment_term_id = NULL,
+  include_deleted = NULL,
+  course_id = NULL,
+  order = NULL,
+  users = NULL,
+  accounts = NULL,
+  terms = NULL,
+  courses = NULL,
+  sections = NULL,
+  enrollments = NULL,
+  groups = NULL,
+  group_categories = NULL,
+  group_memberships = NULL,
+  xlist = NULL,
+  user_observers = NULL,
+  admins = NULL,
+  created_by_sis = NULL,
+  start_at = NULL,
+  end_at = NULL,
+  include_enrollment_state = NULL,
+  enrollment_state = NULL,
+  enrollment_type = NULL,
+  minimum = NULL,
+  ...
+)
 }
 \arguments{
 \item{accountID}{The account ID to retrieve reports from}

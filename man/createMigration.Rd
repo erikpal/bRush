@@ -4,8 +4,14 @@
 \alias{createMigration}
 \title{Create a content migration.}
 \usage{
-createMigration(ID, type = "course",
-  migration_type = "course_copy_importer", settings, server = "test", ...)
+createMigration(
+  ID,
+  type = "course",
+  migration_type = "course_copy_importer",
+  settings,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{ID of context to import into.}

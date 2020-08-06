@@ -4,8 +4,16 @@
 \alias{createOutcomeGroup}
 \title{Create a new outcome group}
 \usage{
-createOutcomeGroup(ID, groupID, type = "account", title, description = "",
-  vendor_guid = NULL, server = "test", ...)
+createOutcomeGroup(
+  ID,
+  groupID,
+  type = "account",
+  title,
+  description = "",
+  vendor_guid = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Account ID of the outcome group to create the outcome in}

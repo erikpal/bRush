@@ -4,8 +4,13 @@
 \alias{getAssignments}
 \title{Get assignments from a course}
 \usage{
-getAssignments(courseID, search_term = NULL, bucket = NULL,
-  server = "test", ...)
+getAssignments(
+  courseID,
+  search_term = NULL,
+  bucket = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to find assignments for}

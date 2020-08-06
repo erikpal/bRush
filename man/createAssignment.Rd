@@ -4,17 +4,34 @@
 \alias{createAssignment}
 \title{Create a new assignment}
 \usage{
-createAssignment(courseID, name, description = "", points_possible = "",
-  type = "online", online_type = c("online_upload", "online_text_entry"),
+createAssignment(
+  courseID,
+  name,
+  description = "",
+  points_possible = "",
+  type = "online",
+  online_type = c("online_upload", "online_text_entry"),
   allowed_extensions = c("doc", "docx", "pdf", "ppt", "pptx", "rtf"),
-  grading_type = "points", assignment_group_id = "",
-  grading_standard_id = "", group_category_id = "", due_at = "",
-  lock_at = "", unlock_at = "", published = FALSE,
-  turnitin_enabled = FALSE, turnitin_settings = NULL,
-  peer_reviews = FALSE, automatic_peer_reviews = FALSE,
-  notify_of_update = FALSE, muted = FALSE,
-  grade_group_students_individual = FALSE, ext_tool_url = NULL,
-  ext_tool_new_tab = FALSE, server = "test", ...)
+  grading_type = "points",
+  assignment_group_id = "",
+  grading_standard_id = "",
+  group_category_id = "",
+  due_at = "",
+  lock_at = "",
+  unlock_at = "",
+  published = FALSE,
+  turnitin_enabled = FALSE,
+  turnitin_settings = NULL,
+  peer_reviews = FALSE,
+  automatic_peer_reviews = FALSE,
+  notify_of_update = FALSE,
+  muted = FALSE,
+  grade_group_students_individual = FALSE,
+  ext_tool_url = NULL,
+  ext_tool_new_tab = FALSE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to create the assignment in.}

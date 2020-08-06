@@ -4,8 +4,7 @@
 \alias{createConversation}
 \title{Create a new conversation}
 \usage{
-createConversation(userID, subject = NULL, body = NULL, server = "test",
-  ...)
+createConversation(userID, subject = NULL, body = NULL, server = "test", ...)
 }
 \arguments{
 \item{userID}{User id of person to message}

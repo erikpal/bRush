@@ -4,8 +4,14 @@
 \alias{editGradebookColumnData}
 \title{Create/edit a custom grade book column data entry for user in a course}
 \usage{
-editGradebookColumnData(courseID, columnID, userID, content, server = "test",
-  ...)
+editGradebookColumnData(
+  courseID,
+  columnID,
+  userID,
+  content,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID with the custom column}

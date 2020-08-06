@@ -4,8 +4,15 @@
 \alias{getExternalTools}
 \title{Get a list of external tools used ina course}
 \usage{
-getExternalTools(ID, type = "course", search_term = NULL,
-  selectable = NULL, include_parents = NULL, server = "test", ...)
+getExternalTools(
+  ID,
+  type = "course",
+  search_term = NULL,
+  selectable = NULL,
+  include_parents = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Account, course or group ID to list external tools in}

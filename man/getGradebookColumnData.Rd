@@ -4,8 +4,13 @@
 \alias{getGradebookColumnData}
 \title{Get custom grade book column data for a course}
 \usage{
-getGradebookColumnData(courseID, columnID, include_hidden = TRUE,
-  server = "test", ...)
+getGradebookColumnData(
+  courseID,
+  columnID,
+  include_hidden = TRUE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID with the custom column}

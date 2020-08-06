@@ -4,9 +4,14 @@
 \alias{getOutcomeResults}
 \title{Get the results of the outcomes for the students}
 \usage{
-getOutcomeResults(ID, include = c("alignments", "outcomes",
-  "outcomes.alignments", "outcome_groups", "outcome_links", "outcome_paths",
-  "users"), include_hidden = TRUE, server = "test", ...)
+getOutcomeResults(
+  ID,
+  include = c("alignments", "outcomes", "outcomes.alignments", "outcome_groups",
+    "outcome_links", "outcome_paths", "users"),
+  include_hidden = TRUE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{Course ID of the outcome}

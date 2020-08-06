@@ -4,8 +4,15 @@
 \alias{getAnalytics}
 \title{Get account or course analytics}
 \usage{
-getAnalytics(ID, type = "activity", term = "current", course = FALSE,
-  studentID = NULL, server = "test", ...)
+getAnalytics(
+  ID,
+  type = "activity",
+  term = "current",
+  course = FALSE,
+  studentID = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{type}{The analytics type (e.g., activity, grades, statistics, assignments, communication, student_summaries)}

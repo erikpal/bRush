@@ -4,8 +4,15 @@
 \alias{createContentExport}
 \title{Create a content export}
 \usage{
-createContentExport(ID, export_type, type = "course",
-  skip_notifications = TRUE, select = NULL, server = "test", ...)
+createContentExport(
+  ID,
+  export_type,
+  type = "course",
+  skip_notifications = TRUE,
+  select = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{ID}{ID of context to import into.}

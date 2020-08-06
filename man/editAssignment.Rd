@@ -4,16 +4,34 @@
 \alias{editAssignment}
 \title{Edit an assignment}
 \usage{
-editAssignment(courseID, assignID, name = NULL, description = NULL,
-  points_possible = NULL, type = NULL, online_type = NULL,
-  allowed_extensions = NULL, grading_type = NULL,
-  assignment_group_id = NULL, grading_standard_id = NULL,
-  group_category_id = NULL, due_at = NULL, lock_at = NULL,
-  unlock_at = NULL, published = NULL, turnitin_enabled = NULL,
-  peer_reviews = NULL, automatic_peer_reviews = NULL,
-  notify_of_update = NULL, muted = NULL,
-  grade_group_students_individual = NULL, ext_tool_url = NULL,
-  ext_tool_new_tab = NULL, server = "test", ...)
+editAssignment(
+  courseID,
+  assignID,
+  name = NULL,
+  description = NULL,
+  points_possible = NULL,
+  type = NULL,
+  online_type = NULL,
+  allowed_extensions = NULL,
+  grading_type = NULL,
+  assignment_group_id = NULL,
+  grading_standard_id = NULL,
+  group_category_id = NULL,
+  due_at = NULL,
+  lock_at = NULL,
+  unlock_at = NULL,
+  published = NULL,
+  turnitin_enabled = NULL,
+  peer_reviews = NULL,
+  automatic_peer_reviews = NULL,
+  notify_of_update = NULL,
+  muted = NULL,
+  grade_group_students_individual = NULL,
+  ext_tool_url = NULL,
+  ext_tool_new_tab = NULL,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{courseID}{Course ID to create the assignment in.}

@@ -4,8 +4,14 @@
 \alias{createAdmin}
 \title{Create a content migration.}
 \usage{
-createAdmin(accountID, userID, roleID, send_confirmation = FALSE,
-  server = "test", ...)
+createAdmin(
+  accountID,
+  userID,
+  roleID,
+  send_confirmation = FALSE,
+  server = "test",
+  ...
+)
 }
 \arguments{
 \item{accountID}{Account ID of context to import into.}

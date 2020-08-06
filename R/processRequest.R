@@ -156,15 +156,15 @@ processRequest <- function(url, body, method = "GET",
                 
                 if(verbose == TRUE) {bRushVerbose(response)}
                 
-                if (response$all_headers[[2]]$status == 303) {
-                        ##This thisrd step is returning a bad request and I can't figure out why
-                        url <-  response$all_headers[[2]]$headers$location
-                        url <- parse_url(url)
-                        response <- POST(url, add_headers(Authorization = header))
-                        status <- http_status(response)   
-                        checkErrors(status) 
-                        if(verbose == TRUE) {bRushVerbose(response)}
-                }
+                # if (response$all_headers[[2]]$status == 303) {
+                #         ##This thsrd step is returning a bad request and I can't figure out why
+                #         url <-  response$all_headers[[2]]$headers$location
+                #         url <- parse_url(url)
+                #         response <- POST(url, add_headers(Authorization = header))
+                #         status <- http_status(response)   
+                #         checkErrors(status) 
+                #         if(verbose == TRUE) {bRushVerbose(response)}
+                # }
                 
                 ##Until the third step is working
                 ##results <- content(response, as = "text")
