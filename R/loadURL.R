@@ -29,7 +29,7 @@ loadURL <- function(server) {
                 server <- Sys.getenv(server)
         }
 
-        url <- parse_url(server)
+        url <- httr::parse_url(server)
         
         return(url)
 }
