@@ -1,7 +1,7 @@
 #' Get courses from an account
 #' 
-#' Get course details for the provided account. All include parameters ("syllabus_body”, 
-#' “term”, “course_progress”, “storage_quota_used_mb”, “total_students”, “teachers) 
+#' Get course details for the provided account. All include parameters (syllabus_body, 
+#' term, course_progress, storage_quota_used_mb, total_students, teachers) 
 #' for this request have all been enabled and can be subsetted out if not needed.
 #' @param accountID Integer of the account ID to find sub-accounts for
 #' @param termID Integer of enrollment term ID
@@ -45,7 +45,7 @@ getCourses <- function(accountID, termID = NULL,
 
         url$query <- c(url$query, by_teachers_list, by_subaccounts_list)
         
-        ##Pass the url to the request processor
+        ## Pass the url to the request processor
         results <- processRequest(url, ...)
         
         return(results)

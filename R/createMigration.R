@@ -6,12 +6,13 @@
 #' @param type String of type - course, account, group, or user
 #' @param migration_type String of migrator type
 #' @param settings Named list of settings for the migrator
+#' @param select If supplied, will select only the identified objects in a list of vectors with content type names (see API documentation for names that work)
 #' @param server Test, beta, prodcution, OR alternative name in R.environ OR url of server
 #' @param ... Optional page options to pass to processRequest
 #' @export
 createMigration <- function(ID, type = "course", 
                             migration_type = "course_copy_importer", 
-                            settings, server = "test", ...) {
+                            settings, select = NULL, server = "test", ...) {
         
         url <- loadURL(server)
         
@@ -39,7 +40,8 @@ createMigration <- function(ID, type = "course",
         require(jsonlite)
         body <- list(
                 migration_type = migration_type,
-                settings = settings
+                settings = settings,
+                select = select
         )
         
         ##Convert ot JSON

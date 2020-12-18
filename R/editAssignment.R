@@ -23,7 +23,7 @@
 #' @param unlock_at POSIXct object of date and time of unlock date
 #' @param assignment_group_id Integer of the assignment group to put assignment in.
 #' @param muted Boolean to mute assignment or not
-#' @param grade_group_students_individually Boolean to say group students will be graded individually.
+#' @param grade_group_students_individual Boolean to say group students will be graded individually.
 #' @param grading_standard_id Integer id of the grading standard used.
 #' @param ext_tool_url Character of external tool url if type is "external_tool".
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.

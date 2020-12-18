@@ -14,7 +14,6 @@
 #' @param peer_reviews Boolean to enable peer reviews
 #' @param automatic_peer_reviews Boolean to enable automatically assign peer reviewers
 #' @param notify_of_update Boolean to notify students that assignment content has changed.
-#' @param external_tool_tag_attributes Named list od external tool attributes.
 #' @param grading_type Character of grading type options (pass_fail, percent, letter_grade, gpa_scale, points)
 #' @param group_category_id ID of group to assign discussion to.
 #' @param due_at POSIXct object of date and time of due date
@@ -23,7 +22,7 @@
 #' @param assignment_group_id Integer of the assignment group to put assignment in.
 #' @param grading_standard_id ID of the grading standard to be used
 #' @param muted Boolean to mute assignment or not
-#' @param grade_group_students_individually Boolean to say group students will be graded individually.
+#' @param grade_group_students_individual Boolean to say group students will be graded individually.
 #' @param ext_tool_url Character of external tool url if type is "external_tool".
 #' @param ext_tool_new_tab Boolean of whether ext tool opens in new tab.
 #' @param server Test, beta, production, or other name in R.environ OR full url of server

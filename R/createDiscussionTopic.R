@@ -4,7 +4,7 @@
 #' @param ID Course or group ID to create the discussion in.
 #' @param title Character of the title of the assignment
 #' @param message Character of the discussion message.
-#' @param discussion_type Character of the discussion type (“side_comment” or "threaded)
+#' @param discussion_type Character of the discussion type ("side_comment" or "threaded")
 #' @param published Boolean to specify if the discussion is published for availability.
 #' @param podcast_enabled Boolean to enable podcast feed.
 #' @param podcast_has_student_posts Boolean to include student replies in podcast feed.
@@ -18,7 +18,6 @@
 #' @param lock_at POSIXct object of date and time to lock for further posts.
 #' @param position_after ID of discussion topic to position this one after.
 #' @param group_category_id ID of group to assign discussion to.
-#' @param assignment Boolean to make this a graded assignment.
 #' @param points_possible Integer of the maximum number of points possible
 #' @param peer_reviews Boolean to enable peer reviews
 #' @param automatic_peer_reviews Boolean to enable automatically assign peer reviewers
@@ -60,7 +59,7 @@ createDiscussionTopic <- function(ID, title, message = "",
         url$path <- "api/v1/courses/ID/discussion_topics"
         url$path <- sub("ID", ID, url$path)
         
-        ##Build the JSON for the body of the POST
+        ## Build the JSON for the body of the POST
         require(jsonlite)
         body <- list(title = title, 
                      message = message,
@@ -77,11 +76,11 @@ createDiscussionTopic <- function(ID, title, message = "",
                      delayed_post_at = delayed_post_at,
                      lock_at = lock_at)
         
-        ##Some parameters cause errors as NULL or ""; this excludes if NULL
+        ## Some parameters cause errors as NULL or empty quotes this excludes if NULL
         if(!is.null(position_after)){body$position_after = as.character(position_after)}
         if(!is.null(group_category_id)){body$group_category_id = as.character(group_category_id)}
         
-        ##Uses points_possible as an indication that this is an assignment 
+        ## Uses points_possible as an indication that this is an assignment 
         if (!is.null(points_possible)) {
                 assignment = list(
                         points_possible = as.character(points_possible),
@@ -93,13 +92,13 @@ createDiscussionTopic <- function(ID, title, message = "",
                 )
                 body$assignment <- assignment
         }
-        ##Some parameters cause errors as NULL or ""; this excludes if NULL
+        ## Some parameters cause errors as NULL or empty quotes this excludes if NULL
         if(!is.null(grading_standard_id)){body$assignment$grading_standard_id = as.character(grading_standard_id)}
         
-        ##Convet to JSON
+        ## Convert to JSON
         body <- jsonlite::toJSON(body, auto_unbox = TRUE, POSIXt = "ISO8601")
         
-        ##Pass the url to the request processor
+        ## Pass the url to the request processor
         results <- processRequest(url, body, method = "CREATE", ...)
         
         return(results)

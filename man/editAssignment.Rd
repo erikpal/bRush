@@ -76,6 +76,8 @@ editAssignment(
 
 \item{muted}{Boolean to mute assignment or not}
 
+\item{grade_group_students_individual}{Boolean to say group students will be graded individually.}
+
 \item{ext_tool_url}{Character of external tool url if type is "external_tool".}
 
 \item{ext_tool_new_tab}{Boolean of whether ext tool opens in new tab.}
@@ -87,8 +89,6 @@ editAssignment(
 \item{turnitin_settings}{Named list of turnitin settings.}
 
 \item{external_tool_tag_attributes}{Named list od external tool attributes.}
-
-\item{grade_group_students_individually}{Boolean to say group students will be graded individually.}
 }
 \description{
 Edit an assignment of the provided ID for the provided course.

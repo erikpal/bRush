@@ -76,6 +76,8 @@ createAssignment(
 
 \item{muted}{Boolean to mute assignment or not}
 
+\item{grade_group_students_individual}{Boolean to say group students will be graded individually.}
+
 \item{ext_tool_url}{Character of external tool url if type is "external_tool".}
 
 \item{ext_tool_new_tab}{Boolean of whether ext tool opens in new tab.}
@@ -83,10 +85,6 @@ createAssignment(
 \item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
-
-\item{external_tool_tag_attributes}{Named list od external tool attributes.}
-
-\item{grade_group_students_individually}{Boolean to say group students will be graded individually.}
 }
 \description{
 Create a new assignment for the provided course.

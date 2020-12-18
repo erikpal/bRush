@@ -9,6 +9,7 @@ createMigration(
   type = "course",
   migration_type = "course_copy_importer",
   settings,
+  select = NULL,
   server = "test",
   ...
 )
@@ -21,6 +22,8 @@ createMigration(
 \item{migration_type}{String of migrator type}
 
 \item{settings}{Named list of settings for the migrator}
+
+\item{select}{If supplied, will select only the identified objects in a list of vectors with content type names (see API documentation for names that work)}
 
 \item{server}{Test, beta, prodcution, OR alternative name in R.environ OR url of server}
 
