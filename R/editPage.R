@@ -1,7 +1,8 @@
-#' Create a new wiki page
+#' Edit a new wiki page
 #' 
 #' Create a new wiki page for the provided course or group.
 #' @param ID Course or group id to create the page in
+#' @param page_url The short url path of the page
 #' @param title String of page title.
 #' @param body String of body content.
 #' @param edit String of roles that can edit page ("teacher","student","members,"public")
@@ -12,16 +13,20 @@
 #' @param ... Optional page options to pass to processRequest
 #' @export
 
-createPage <- function(ID, title = NULL, body = NULL, 
+editPage <- function(ID, 
+                     page_url = page_url,
+                     title = NULL, body = NULL, 
                        edit = "teachers", notify = FALSE,
                        publish = TRUE,
-                       front = FALSE, 
+                       front = FALSE,
                        server = "test", ...) {
         
         url <- loadURL(server)
         
-        url$path <- "api/v1/courses/ID/pages"
+        url$path <- "api/v1/courses/ID/pages/URL"
         url$path <- sub("ID", ID, url$path)
+        url$path <- sub("URL", page_url, url$path)
+        
 
         ##Build the JSON for the body of the 
         require(jsonlite)
