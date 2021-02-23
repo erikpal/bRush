@@ -52,6 +52,7 @@ processRequest <- function(url, body, method = "GET",
                         if(verbose == TRUE) {bRushVerbose(response)}
                         
                         content <- content(response, as = "text")
+                        test <<- content
                         content <- jsonlite::fromJSON(content, flatten = TRUE)
                         
                         resultkey <- tryCatch({
@@ -67,15 +68,18 @@ processRequest <- function(url, body, method = "GET",
                         ##fromJSON doesn't convert single items to data frames
                         ##This is a temporary fix for length based issues so that
                         ##the list is passed as results.
-                        if (!is.data.frame(content)) {
-                                if (length(content) == 0) {
-                                        #warning("No Results")
-                                        break
-                                } else {
-                                        results[[page]] <- content
-                                        break
-                                }
-                        }
+                        ##
+                        ## UPDATE: This breaks non-rectangular, multi-page results
+                        ## Turning off to find a way to test wiht getUserProfile
+                        # if (!is.data.frame(content)) {
+                        #         if (length(content) == 0) {
+                        #                 #warning("No Results")
+                        #                 break
+                        #         } else {
+                        #                 results[[page]] <- content
+                        #                 break
+                        #         }
+                        # }
                         
                         results[[page]] <- content
                         
