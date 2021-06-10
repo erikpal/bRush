@@ -28,7 +28,8 @@ getRubric <- function(ID, rubricID = "", type = "account", server = "test", ...)
         url$path <- sub("rubricID", rubricID, url$path)
         
         url$query <- list("include[]" = "assessments",
-                          "include[]" = "associations")
+                          "include[]" = "associations",
+                          "style" = "full")
         
         ##Pass the url to the request processor
         results <- processRequest(url, ...)

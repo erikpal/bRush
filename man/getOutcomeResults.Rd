@@ -6,6 +6,8 @@
 \usage{
 getOutcomeResults(
   ID,
+  userIDs = NULL,
+  outcomeIDs = NULL,
   include = c("alignments", "outcomes", "outcomes.alignments", "outcome_groups",
     "outcome_links", "outcome_paths", "users"),
   include_hidden = TRUE,
@@ -16,6 +18,10 @@ getOutcomeResults(
 \arguments{
 \item{ID}{Course ID of the outcome}
 
+\item{userIDs}{Vector of user IDs of the students}
+
+\item{outcomeIDs}{Vector of outcome IDs of the outcomes}
+
 \item{include}{Options to include in the results}
 
 \item{include_hidden}{Boolean to include results hidden from learning mastery gradebook}
@@ -23,10 +29,6 @@ getOutcomeResults(
 \item{server}{Test, beta, production, or other name in R.environ OR full url of server}
 
 \item{...}{Optional page options to pass to processRequest}
-
-\item{userIDs}{User IDs of the students}
-
-\item{outcomeIDs}{Outcome IDs of the outcomes}
 }
 \description{
 Get the results of the outcomes for the students
