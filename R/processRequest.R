@@ -52,7 +52,7 @@ processRequest <- function(url, body, method = "GET",
                         if(verbose == TRUE) {bRushVerbose(response)}
                         
                         content <- content(response, as = "text")
-                        test <<- content
+                        #test <<- content
                         content <- jsonlite::fromJSON(content, flatten = TRUE)
                         
                         resultkey <- tryCatch({
