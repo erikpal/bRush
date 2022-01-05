@@ -16,4 +16,4 @@ Imports:
     openssl
 License: MIT License
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

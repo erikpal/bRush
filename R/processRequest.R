@@ -96,7 +96,25 @@ processRequest <- function(url, body, method = "GET",
                 }
                 
                 if (is.data.frame(results[[1]])) {
-                        results <- bind_rows(results)
+                        
+                        ## Identify columns that are logical in one frame and
+                        ## character in another
+                        logichars <- results %>% 
+                                map(~map(.x, ~typeof(.x)) %>% 
+                                            unlist() %>%
+                                            tibble(name = names(.), value = .)) %>% 
+                                bind_rows() %>% 
+                                distinct() %>% 
+                                filter(value %in% c("logical", "character")) %>% 
+                                group_by(name) %>%
+                                filter(n() > 1) %>% 
+                                select(name) %>% 
+                                distinct() %>% 
+                                pull(name)
+
+                        results <- results %>% 
+                                map(~mutate(.x, across(any_of(logichars), as.character))) %>%
+                                bind_rows()
                         #results <- do.call(rbind, results)
                         #row.names(results) <- NULL
                 }
