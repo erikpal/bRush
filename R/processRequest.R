@@ -121,7 +121,7 @@ processRequest <- function(url, body, method = "GET",
                         } else {
                                 
                                 results <- bind_rows(results)
-                                
+
                         }
                        
 
