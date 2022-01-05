@@ -99,22 +99,32 @@ processRequest <- function(url, body, method = "GET",
                         
                         ## Identify columns that are logical in one frame and
                         ## character in another
-                        logichars <- results %>% 
-                                map(~map(.x, ~typeof(.x)) %>% 
+                        if (ncol(results[[1]]) > 0) {
+                                
+                                logichars <- results %>% 
+                                        map(~map(.x, ~typeof(.x)) %>% 
                                             unlist() %>%
                                             tibble(name = names(.), value = .)) %>% 
-                                bind_rows() %>% 
-                                distinct() %>% 
-                                filter(value %in% c("logical", "character")) %>% 
-                                group_by(name) %>%
-                                filter(n() > 1) %>% 
-                                select(name) %>% 
-                                distinct() %>% 
-                                pull(name)
+                                        bind_rows() %>% 
+                                        distinct() %>% 
+                                        filter(value %in% c("logical", "character")) %>% 
+                                        group_by(name) %>%
+                                        filter(n() > 1) %>% 
+                                        select(name) %>% 
+                                        distinct() %>% 
+                                        pull(name)
+                                
+                                results <- results %>% 
+                                        map(~mutate(.x, across(any_of(logichars), as.character))) %>%
+                                        bind_rows()
+                                
+                        } else {
+                                
+                                results <- bind_row(results)
+                                
+                        }
+                       
 
-                        results <- results %>% 
-                                map(~mutate(.x, across(any_of(logichars), as.character))) %>%
-                                bind_rows()
                         #results <- do.call(rbind, results)
                         #row.names(results) <- NULL
                 }
