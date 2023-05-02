@@ -172,6 +172,24 @@ processRequest <- function(url, body, method = "GET",
                 return(results)
         }
         
+        if (method == "DELETE") {
+                results <- NULL
+                
+                response <- DELETE(url, 
+                                 add_headers(Authorization = header))
+                status <- http_status(response)   
+                
+                ##Deal with errors
+                checkErrors(status)  
+                
+                if(verbose == TRUE) {bRushVerbose(response)}
+                
+                results <- content(response, as = "text")
+                results <- jsonlite::fromJSON(results, flatten = TRUE)
+                
+                return(results)
+        }
+        
         if (method == "UPLOAD") {
                 results <- body##rename after pass
                 params <- results$upload_params

@@ -1,7 +1,7 @@
 Package: bRush
 Title: R Canvas Instructure API Client
-Version: 0.0.5
-Date: 2021-03-25
+Version: 0.0.6
+Date: 2023-05-02
 Authors@R: person("Erik", "Palmore", email = "erikpal@gmail.com", role = c("aut", "cre"))
 Description: Provides an interface to the Instructure Canvas API to get course data and
    create/edit course objects. Functions form and submit API requests to the specified
@@ -16,4 +16,4 @@ Imports:
     openssl
 License: MIT License
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
